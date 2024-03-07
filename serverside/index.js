@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 //connecting mongodb server
-mongoose.connect('mongodb://localhost:27017/password-manager').then(()=>{console.log("success")}).catch((err)=>{console.log(err)});
+mongoose.connect('mongodb://localhost:27017/tab-manager').then(()=>{console.log("success")}).catch((err)=>{console.log(err)});
 
 //register route
 app.post("/api/register",async function(req,res){
