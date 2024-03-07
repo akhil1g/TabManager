@@ -1,0 +1,97 @@
+body {
+    background-color: #ffe8d6;
+    margin: 0;
+    padding: 0;
+  }
+  .outer-container-register{
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .container-register{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 70px; */
+    width: 60%;
+
+  }
+  
+  form {
+    width: 100%;
+    line-height: 70px;
+    background-color: #ffe8d6;
+    padding: 30px;
+    border-radius: 10px;
+    align-items: center;
+  }
+  
+  
+.reg-heading{
+  width: 100%;
+    display: block;
+    color: orange;
+    text-align: center;
+    /* margin: 0 0 20px 90px; */
+    font-size: 40px;
+    font-family: "Bacasime Antique", serif;
+    font-weight: 200;
+  }
+  
+  .sub-register{
+    display: flex;
+    margin-bottom: 10px;
+  }
+ 
+  .label-register{
+    margin-inline: 15px;
+    width: 130px;
+    font-size: 22px;
+    font-family: "Bacasime Antique", serif;
+    font-weight: 30;
+  }
+  
+  input {
+    width: 85%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .button-container{
+    align-items: center;
+    width: 100%;
+  }
+  .button{
+    text-align: center;
+    align-items: center;
+    width: 25%;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin-left: 300px; */
+    font-size: 30px;
+    font-family: "Bacasime Antique", serif;
+  }
+
+  @media only screen and (max-width: 800px) {
+     .container-register{
+      width: 80%;
+     }
+     .button{
+      width: 30%;
+      font-size: 25px;
+     }
+  }
+  @media only screen and (max-width: 600px) {
+    .container-register{
+     width: 100%;
+    }
+ }
