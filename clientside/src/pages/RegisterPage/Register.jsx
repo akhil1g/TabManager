@@ -22,49 +22,65 @@ const Register=function()
         if(data.status==='ok')
         window.location.href="./login";
     }
-
     return (
-        <div>
-            <div className="outer-container-register">
-            <div className="container-register">
+      <div>
+        <div className="outer-container-register">
+          <div className="container-register">
             <form onSubmit={registerUser}>
-            <h1 className="reg-heading">Register</h1>
-            <div className="sub-register">
-            <label className="label-register">Name : </label>
-                <input value={name} 
-                onChange={function(e){
-                    setName(e.target.value)
-                }} 
-                type="text" 
-                placeholder="Name"
-                 name="name"></input>
-            </div>
-            <div className="sub">
-            <label className="label-register">Email : </label>
-                <input value={email} 
-                 onChange={function(e){
-                    setEmail(e.target.value)
-                }} 
-                type="email"
-                 placeholder="Email" 
-                 name="email"></input>
-            </div>
-            <div className="sub">
-            <label className="label-register">Password : </label>
-                <input value={password}
-                 onChange={function(e){
-                    setPassword(e.target.value)
-                }} 
-                 type="password" 
-                 placeholder="*****" 
-                 name="password"></input>
-            </div>
-            <div className="button-conatiner">
-                 <input type="submit" value="Register" className="button"></input></div>
+              <h1 className="reg-heading">Register</h1>
+              <div className="sub-register">
+                <label className="label-register">Name : </label>
+                <input
+                  value={name}
+                  onChange={function (e) {
+                    setName(e.target.value);
+                  }}
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                ></input>
+              </div>
+              <div className="sub">
+                <label className="label-register">Email : </label>
+                <input
+                  value={email}
+                  onChange={function (e) {
+                    setEmail(e.target.value);
+                  }}
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                ></input>
+              </div>
+              <div className="sub">
+                <label className="label-register">Password : </label>
+                <input
+                  value={password}
+                  onChange={function (e) {
+                    setPassword(e.target.value);
+                  }}
+                  type="password"
+                  placeholder="*****"
+                  name="password"
+                ></input>
+              </div>
+              <div className="button-conatiner">
+                <input
+                  type="submit"
+                  value="Register"
+                  className="button"
+                ></input>
+              </div>
+              <hr></hr>
+              <div className="button-container">
+                <button className="google-sign-up-button">
+                  Sign up with Google
+                </button>
+              </div>
             </form>
-            </div>
+          </div>
         </div>
-        </div>
-    )
+      </div>
+    );
 }
 export default Register;

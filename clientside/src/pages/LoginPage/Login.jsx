@@ -1,4 +1,7 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
+import {auth, provider} from "./config";
+import { signInWithPopup } from "firebase/auth";
+
 import './login.css'
 const Login=function()
 {
@@ -30,40 +33,64 @@ const Login=function()
             alert('Please check your Username and PassWord carefully');
         }
     }
+    const handleClick=()=>{
+        signInWithPopup(auth, provider).then((data)=>{
+            setValue(data.user.email)
+            localStorage.setItem("email", data.user.email)
+        })
+    }
+    const [value, setValue] = useState('');
+    useEffect(() =>{
+        setValue(localStorage.getItem('email'))
+    })
 
     return (
-        <div>
-            <div className="outer-container">
-            <div className="container-login">
+      <div>
+        <div className="outer-container">
+          <div className="container-login">
             <form onSubmit={loginUser}>
-            <h1 className="login-heading">Login</h1>
-            <div className="sub">
+              <h1 className="login-heading">Login</h1>
+              <div className="sub">
                 <label className="label-login">Email : </label>
-                    <input value={email} 
-                    onChange={function(e){
-                        setEmail(e.target.value)
-                    }} 
-                    type="email"
-                    placeholder="Email" 
-                    name="email" >
-                    </input>
-            </div>
-            <div className="sub">
+                <input
+                  value={email}
+                  onChange={function (e) {
+                    setEmail(e.target.value);
+                  }}
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                ></input>
+              </div>
+              <div className="sub">
                 <label className="label-login">Password : </label>
-                    <input value={password}
-                    onChange={function(e){
-                        setPassword(e.target.value)
-                    }} 
-                    type="password" 
-                    placeholder="*****" 
-                    name="password"></input>
-            </div>
+                <input
+                  value={password}
+                  onChange={function (e) {
+                    setPassword(e.target.value);
+                  }}
+                  type="password"
+                  placeholder="*****"
+                  name="password"
+                ></input>
+              </div>
               <div className="button-container">
-                 <input type="submit" value="Login" className="submit-button"></input> </div>
+                <input
+                  type="submit"
+                  value="Login"
+                  className="submit-button"
+                ></input>{" "}
+              </div>
+              <hr></hr>
+              <div className="button-container">
+                <button className="google-sign-in-button" onClick={handleClick}>
+                  Sign in with Google
+                </button>
+              </div>
             </form>
-            </div>
-            </div>
-            </div>
-    )
+          </div>
+        </div>
+      </div>
+    );
 }
 export default Login;
