@@ -13,7 +13,7 @@ import jwt from 'jwt-decode'
 
 export default function App() {
  
-  const [loggedin,setLoggedin]=useState(false);
+  const [loggedin, setLoggedin]=useState(false);
   const isAuthenticated =  function() {
     const token = localStorage.getItem('token');
     console.log(token);

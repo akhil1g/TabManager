@@ -12,9 +12,6 @@ function Main() {
     }
     return (
         <div className="main-container">
-            <div className="main-left-sec" >
-                <span className="main-heading1">Tab Manager</span>
-            </div>
             <div className="main-right-sec">
                 <h3 className="main-heading2">Welcome!</h3>
                 <p className="main-right-sec-para">New here? </p>

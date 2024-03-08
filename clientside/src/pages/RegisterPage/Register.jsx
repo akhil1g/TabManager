@@ -24,46 +24,39 @@ const Register=function()
     }
 
     return (
-        <div>
-            <div className="outer-container-register">
-            <div className="container-register">
-            <form onSubmit={registerUser}>
-            <h1 className="reg-heading">Register</h1>
-            <div className="sub-register">
-            <label className="label-register">Name : </label>
-                <input value={name} 
-                onChange={function(e){
-                    setName(e.target.value)
-                }} 
-                type="text" 
-                placeholder="Name"
-                 name="name"></input>
-            </div>
-            <div className="sub">
-            <label className="label-register">Email : </label>
-                <input value={email} 
-                 onChange={function(e){
-                    setEmail(e.target.value)
-                }} 
-                type="email"
-                 placeholder="Email" 
-                 name="email"></input>
-            </div>
-            <div className="sub">
-            <label className="label-register">Password : </label>
-                <input value={password}
-                 onChange={function(e){
-                    setPassword(e.target.value)
-                }} 
-                 type="password" 
-                 placeholder="*****" 
-                 name="password"></input>
-            </div>
-            <div className="button-conatiner">
-                 <input type="submit" value="Register" className="button"></input></div>
+        <div className="reg-box">
+            <form className="reg-form" onSubmit={registerUser}>
+            <h1 className="reg-head">Register Now!</h1>
+            <div className="reg-label">Name:</div>
+            <input value={name} 
+                    onChange={function(e){
+                        setName(e.target.value)
+                    }} 
+                    type="text"
+                    name="name"
+                    className="reg-input">
+            </input>
+            <div className="reg-label">Email:</div>
+            <input value={email} 
+                    onChange={function(e){
+                        setEmail(e.target.value)
+                    }} 
+                    type="email"
+                    name="email"
+                    className="reg-input">
+            </input>
+            <div className="reg-label">Password:</div>
+            <input value={password}
+                    onChange={function(e){
+                        setPassword(e.target.value)
+                    }} 
+                    type="password" 
+                    name="password"
+                    className="reg-input">
+            </input>
+            <button className="reg-button" type="submit" value="Register">Continue..</button>
+            <div className="reg-or">OR</div>
             </form>
-            </div>
-        </div>
         </div>
     )
 }

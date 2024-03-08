@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import './login.css'
+
 const Login=function()
 {
     const [email,setEmail]=useState("");
@@ -27,43 +28,37 @@ const Login=function()
         }
         else
         {
-            alert('Please check your Username and PassWord carefully');
+            alert('Please check your Username and Password carefully');
         }
     }
 
     return (
-        <div>
-            <div className="outer-container">
-            <div className="container-login">
-            <form onSubmit={loginUser}>
-            <h1 className="login-heading">Login</h1>
-            <div className="sub">
-                <label className="label-login">Email : </label>
-                    <input value={email} 
-                    onChange={function(e){
-                        setEmail(e.target.value)
-                    }} 
-                    type="email"
-                    placeholder="Email" 
-                    name="email" >
-                    </input>
-            </div>
-            <div className="sub">
-                <label className="label-login">Password : </label>
-                    <input value={password}
-                    onChange={function(e){
-                        setPassword(e.target.value)
-                    }} 
-                    type="password" 
-                    placeholder="*****" 
-                    name="password"></input>
-            </div>
-              <div className="button-container">
-                 <input type="submit" value="Login" className="submit-button"></input> </div>
-            </form>
-            </div>
-            </div>
-            </div>
+        <div className="login-box">
+        <form className="login-form" onSubmit={loginUser}>
+        <h1 className="login-head">Login</h1>
+        <div className="login-label">Email:</div>
+        <input value={email} 
+                onChange={function(e){
+                    setEmail(e.target.value)
+                }} 
+                type="email"
+                name="email"
+                className="login-input">
+        </input>
+        <div className="login-label">Password:</div>
+        <input value={password}
+                onChange={function(e){
+                    setPassword(e.target.value)
+                }} 
+                type="password" 
+                name="password"
+                className="login-input">
+        </input>
+        <button className="login-button" type="submit" value="Login">Continue..</button>
+        <div className="login-or">OR</div>
+        </form>
+        
+        </div>
     )
 }
 export default Login;
