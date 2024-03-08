@@ -1,4 +1,7 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
+import {auth, provider} from "./config";
+import { signInWithPopup } from "firebase/auth";
+
 import './login.css'
 
 const Login=function()
@@ -31,6 +34,16 @@ const Login=function()
             alert('Please check your Username and Password carefully');
         }
     }
+    const handleClick=()=>{
+        signInWithPopup(auth, provider).then((data)=>{
+            setValue(data.user.email)
+            localStorage.setItem("email", data.user.email)
+        })
+    }
+    const [value, setValue] = useState('');
+    useEffect(() =>{ 
+        setValue(localStorage.getItem('email'))
+    })
 
     return (
         <div className="login-box">
@@ -56,8 +69,13 @@ const Login=function()
         </input>
         <button className="login-button" type="submit" value="Login">Continue..</button>
         <div className="login-or">OR</div>
+        <hr></hr>
+        <div className="button-container">
+        <button className="google-sign-in-button" onClick={handleClick}>
+            Sign in with Google
+        </button>
+        </div>
         </form>
-        
         </div>
     )
 }

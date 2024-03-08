@@ -22,7 +22,6 @@ const Register=function()
         if(data.status==='ok')
         window.location.href="./login";
     }
-
     return (
         <div className="reg-box">
             <form className="reg-form" onSubmit={registerUser}>
@@ -56,6 +55,12 @@ const Register=function()
             </input>
             <button className="reg-button" type="submit" value="Register">Continue..</button>
             <div className="reg-or">OR</div>
+            <hr></hr>
+            <div className="button-container">
+            <button className="google-sign-up-button">
+                Sign up with Google
+            </button>
+            </div>
             </form>
         </div>
     )
