@@ -12,56 +12,15 @@ import jwt from 'jwt-decode'
 
 
 export default function App() {
- 
-  const [loggedin, setLoggedin]=useState(false);
-  const isAuthenticated =  function() {
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
-      try {
-        const decoded=jwt(token, 'secretkey');
-        console.log(decoded);
-        if(decoded)
-        {
-          console.log(decoded);
-          return true;
-        }
-        else{
-          return false;
-        }
-      } 
-      catch (err) {
-        console.error(err);
-      }
-    }
-    else
-      return false;
-  };
-  
-  const ProtectedRoute = (props) => {
-
-       const val=isAuthenticated();
-      const navigate = useNavigate();
-     
-      useEffect(()=>{
-        if(!val)
-        {
-          navigate("/login");
-        }
-      },[]);
-      return  <div>{props.children}</div>
-    };
-
-
   return (
     <div>
       <Navbar />
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/" element={<Home />}/>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/home" element={<ProtectedRoute ><Home /></ProtectedRoute> } />
+      <Route path="/landing" element={<Main />} />
       </Routes>
       </BrowserRouter>
     </div>

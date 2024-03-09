@@ -1,50 +1,52 @@
 import React,{useEffect, useState} from "react";
-import {auth, provider} from "./config";
 import { signInWithPopup } from "firebase/auth";
 
 import './login.css'
+import { useNavigate } from "react-router";
 
 const Login=function()
 {
+    const history=useNavigate();
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    
+
+    // login event
     async function loginUser(event)
     {
         event.preventDefault();
-        const response=await fetch('http://localhost:2000/api/login',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({email,password}),
+        const response = await fetch("http://localhost:2000/auth/login", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            // "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-allow-Origin": true,
+          },
+          body: JSON.stringify({ email, password }),
         });
-        const data=await response.json();
-        if(data.user)
+        console.log(response.status);
+        const result = await fetch("http://localhost:2000/auth/user", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-allow-Credentials": true,
+          },
+        });
+        const data = await result.json();
+        console.log(data);
+        if(data.code==200)
         {
-            localStorage.setItem('token',data.user);
-
-            
-            alert('Login Successful');
-            
-            window.location.href='./Home';
-        }
-        else
-        {
-            alert('Please check your Username and Password carefully');
+            history('/');
         }
     }
-    const handleClick=()=>{
-        signInWithPopup(auth, provider).then((data)=>{
-            setValue(data.user.email)
-            localStorage.setItem("email", data.user.email)
-        })
-    }
-    const [value, setValue] = useState('');
-    useEffect(() =>{ 
-        setValue(localStorage.getItem('email'))
-    })
 
+    // google login handle
+    const google = ()=> {
+        window.location.replace("http://localhost:2000/auth/google");
+    }
+
+    // main return function
     return (
         <div className="login-box">
         <form className="login-form" onSubmit={loginUser}>
@@ -71,7 +73,7 @@ const Login=function()
         <div className="login-or">OR</div>
         <hr></hr>
         <div className="button-container">
-        <button className="google-sign-in-button" onClick={handleClick}>
+        <button className="google-sign-in-button" onClick={google}>
             Sign in with Google
         </button>
         </div>

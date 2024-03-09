@@ -1,20 +1,39 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import "./Main.css";
 import { useNavigate } from "react-router-dom";
 
 function Main() {
     const navigate = useNavigate();
     function handleRegister(){
-        navigate('./register');
+        navigate('/register');
     }
     function handleLogin(){
-        navigate('./login');
+        navigate('/login');
     }
+    const [user, setUser] = useState("");
+    useEffect(() => {
+      async function getUser() {
+        const result = await fetch("http://localhost:2000/auth/user", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-allow-Credentials": true,
+          },
+        });
+        const data = await result.json();
+        console.log(data);
+        if (data.code == 200) {
+          navigate("/");
+        }
+      }
+      getUser();
+    }, []);
     return (
         <div className="main-container">
             <div className="main-right-sec">
                 <h3 className="main-heading2">Welcome!</h3>
-                <p className="main-right-sec-para">New here? </p>
+                <p className="main-right-sec-para">New here? {user} </p>
                 <p className="main-right-sec-para">Get started by creating an account with us.</p>
                 <button 
                     className="register-btn"
