@@ -3,7 +3,11 @@ import {auth, provider} from "./config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router";
 import './login.css'
+<<<<<<< HEAD
 import Navbar from "../Navbar/Navbar";
+=======
+
+>>>>>>> 2299f8688cfac3ba94ed0483da3415e6c3aa32c8
 const Login=function()
 {
     const [email,setEmail]=useState("");
@@ -27,7 +31,7 @@ const Login=function()
         }
         else
         {
-            alert('Please check your Username and PassWord carefully');
+            alert('Please check your Username and Password carefully');
         }
     }
     const handleClick=()=>{
@@ -37,11 +41,12 @@ const Login=function()
         })
     }
     const [value, setValue] = useState('');
-    useEffect(() =>{
+    useEffect(() =>{ 
         setValue(localStorage.getItem('email'))
     })
 
     return (
+<<<<<<< HEAD
       <div>
         <Navbar/>
         <div className="outer-container">
@@ -87,8 +92,39 @@ const Login=function()
               </div>
             </form>
           </div>
+=======
+        <div className="login-box">
+        <form className="login-form" onSubmit={loginUser}>
+        <h1 className="login-head">Login</h1>
+        <div className="login-label">Email:</div>
+        <input value={email} 
+                onChange={function(e){
+                    setEmail(e.target.value)
+                }} 
+                type="email"
+                name="email"
+                className="login-input">
+        </input>
+        <div className="login-label">Password:</div>
+        <input value={password}
+                onChange={function(e){
+                    setPassword(e.target.value)
+                }} 
+                type="password" 
+                name="password"
+                className="login-input">
+        </input>
+        <button className="login-button" type="submit" value="Login">Continue..</button>
+        <div className="login-or">OR</div>
+        <hr></hr>
+        <div className="button-container">
+        <button className="google-sign-in-button" onClick={handleClick}>
+            Sign in with Google
+        </button>
+>>>>>>> 2299f8688cfac3ba94ed0483da3415e6c3aa32c8
         </div>
-      </div>
-    );
+        </form>
+        </div>
+    )
 }
 export default Login;

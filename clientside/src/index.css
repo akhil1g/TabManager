@@ -1,5 +1,19 @@
+<<<<<<< HEAD
 html,body {
     background-color: #FFE8D6;
     width: 1000px;
     height: 1000px;
+=======
+:root {
+    --blue: #1e90ff;
+    --bg-blue: #94cfff;
+    --white: #FEFBF6    ;
+  }
+body {
+    background: linear-gradient(20deg,var(--bg-blue) 30%, var(--white) 80%);
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    font-family: "Noto Sans", sans-serif;
+>>>>>>> 2299f8688cfac3ba94ed0483da3415e6c3aa32c8
 }

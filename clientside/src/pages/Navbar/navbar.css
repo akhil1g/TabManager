@@ -1,55 +1,42 @@
 .nav-box {
-    margin: 0;
-    height: 80px;
-    width: 100%;
-    background-color: orange;
-    display: flex;
-    flex-direction: row;
     top: 0;
+    position: sticky;
+    height: 60px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .nav-heading {
-    width: 15%;
-    margin: 1.5rem 0 1rem 0.5rem;
-    font-size: larger;
-    font-weight: bold;
-    font-family: "Montserrat", sans-serif;
+    height: max-content;
+    width: max-content;
+    font-size: 25px;
+    margin-left: 20px;
+    font-family: "Noto Sans", sans-serif;
 }
 .nav-heading:hover{
     cursor: pointer;
 }
-.nav-logo {
-    height: 33px;
-    margin: 1rem 0 1rem 1rem;
-}
 .logout-button{
-    width: 80%;
+    height: max-content;
+    width: max-content;
+    margin-right: 20px;
 }
 
 .logout{
-    margin-right: 15px;
-    float: right;
-    margin-top: 20px;
-    height: 35px;
+    padding: 5px 10px;
     cursor: pointer;
-    background: none;
-    border: 1px solid black;
-    font-size: 20px;
-    border: none;
-    background-color: #333;
-    color: white;
-    box-shadow: 5px 10px 10px gray;
-    width: 8%;
-    min-width: fit-content;
-    letter-spacing: 1px;
-    font-family: "Bacasime Antique", serif;
+    font-size: large;
+    font-weight: 500;
+    font-family: "Noto Sans", sans-serif;
+    border: 2px solid;
+    border-radius: 25px;
+    background-color: var(--bg-blue);
 }
 .logout:hover{
-    background-color: white;
-    color: black;
+    background-color: var(--white);
 }
 
 @media (max-width : 640px){
-    .nav-heading {
-        width: 60%;
-    }
+    
 }

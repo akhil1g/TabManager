@@ -1,94 +1,49 @@
-body{
-  background-color: #ffe8d6;
-  margin: 0;
-  padding: 0;
-  align-items: center;
+.login-box{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.outer-container{
-  width: 100%;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
+.login-form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 400px;
+    border: 2px solid var(--blue);
+    border-radius: 5%;
+    padding: 50px;
 }
-.container-login {
-  text-align: center; 
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  /* display: flex; */
-  margin-top: 30px;
+.login-head{
+    text-align: center;
 }
+.login-label{
+    font-size: 20px;
+    margin: 0 auto 5px 5px;
+}
+.login-input{
+    height: 30px;
+    background-color: var(--white);
+    border: 1px solid grey;
+    border-radius: 25px;
+    margin-bottom: 15px;
+    padding: 2px;
 
-form{
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  line-height: 70px;
-  background-color: #ffe8d6;
-  border-radius: 10px;
 }
-
-.login-heading{
-  display: block;
-  color: orange;
-  text-align: center;
-  margin: 0 0 20px 40px;
-  font-size: 40px;
-  font-family: "Bacasime Antique", serif;
-  font-weight: 200;
+.login-button{
+    height: 40px;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--blue);
+    font-size: large;
+    font-family: "Noto Sans", sans-serif;
+    margin-bottom: 15px;
 }
-
-.sub{
-  display: flex;
-  margin-bottom: 10px;
+.login-or{
+    text-align: center;
 }
-
-.label-login{
-  margin-inline: 15px;
-  width:25%;
-  font-size: 18px;
-  font-family: "Bacasime Antique", serif;
-  font-weight: 30;
-}
-
-input{
-  width: 75%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.button-container{
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  width: 100%;
-}
-.submit-button{
-  width: 50%;
-  padding: 10px;
-  margin-left: 10%;
-  align-items: center;
-  justify-content: center;
-  background-color: orange;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 30px;
-  font-family: "Bacasime Antique", serif;
-}
-
 @media only screen and (max-width: 800px) {
-  .container-login{
-    width: 60%;
-  }
-  /* .label-login{
-    font-size: 15px;
-  } */
+  
 }
 @media only screen and (max-width: 700px) {
   .container-login{
