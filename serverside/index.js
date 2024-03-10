@@ -14,7 +14,7 @@ mongoose.connect('mongodb://localhost:27017/tab-manager').then(()=>{console.log(
 
 //register route
 app.post("/api/register",async function(req,res){
-    // console.log(req.body);
+    console.log(req.body);
     try{
             const encryptedpw=await bcrypt.hash(req.body.password,10);
             // const encryptedpw=await encrypt.encrypt(req.body.password);
@@ -24,6 +24,7 @@ app.post("/api/register",async function(req,res){
             password:encryptedpw,
          })
         res.json({status:'ok'});
+        console.log('registered');
     }
     catch(err)
     {
@@ -36,13 +37,11 @@ app.post("/api/register",async function(req,res){
 
 //login route
 app.post("/api/login",async function(req,res){
-    // console.log(req.body);
     try{
            const user=await User.findOne({
             email:req.body.email, 
         })
             const isValid=await bcrypt.compare(req.body.password,user.password);
-            // console.log(user);
             if(isValid){
                 const token=jwt.sign({name:req.body.name,email:req.body.email},"secretkey")
                 res.json({status: 'ok', user : token});
@@ -84,5 +83,5 @@ try{
 
 
 app.listen(2000,function(){
-    console.log("server is running at port 3000");
+    console.log("server is running at port 2000");
 });

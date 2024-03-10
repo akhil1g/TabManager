@@ -1,13 +1,14 @@
 import React,{useEffect, useState} from "react";
 import {auth, provider} from "./config";
 import { signInWithPopup } from "firebase/auth";
-
+import { useNavigate } from "react-router";
 import './login.css'
+import Navbar from "../Navbar/Navbar";
 const Login=function()
 {
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    
+    const navigate=useNavigate();
     async function loginUser(event)
     {
         event.preventDefault();
@@ -22,11 +23,7 @@ const Login=function()
         if(data.user)
         {
             localStorage.setItem('token',data.user);
-
-            
-            alert('Login Successful');
-            
-            window.location.href='./Home';
+            navigate("/home");
         }
         else
         {
@@ -46,6 +43,7 @@ const Login=function()
 
     return (
       <div>
+        <Navbar/>
         <div className="outer-container">
           <div className="container-login">
             <form onSubmit={loginUser}>

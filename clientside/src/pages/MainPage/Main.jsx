@@ -1,16 +1,28 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./Main.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 function Main() {
     const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        if (token) {
+          console.log("balle balle")
+          navigate("/home");
+        }
+      })
     function handleRegister(){
         navigate('./register');
+
     }
     function handleLogin(){
         navigate('./login');
     }
     return (
+        <div>
+            <Navbar/>
         <div className="main-container">
             <div className="main-left-sec" >
                 <span className="main-heading1">Tab Manager</span>
@@ -30,6 +42,7 @@ function Main() {
                     onClick={handleLogin}
                 >Login</button>
             </div>
+        </div>
         </div>
     );
 }

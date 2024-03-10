@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import './register.css'
+import { useNavigate } from "react-router";
 
 
 const Register=function()
@@ -7,7 +8,7 @@ const Register=function()
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    
+    const navigate=useNavigate();
     async function registerUser(event)
     {
         event.preventDefault();
@@ -19,8 +20,11 @@ const Register=function()
             body:JSON.stringify({name,email,password}),
         });
         const data=await response.json();
+        // console.log(data);
         if(data.status==='ok')
-        window.location.href="./login";
+        {
+          navigate("/login");
+        }
     }
     return (
       <div>
