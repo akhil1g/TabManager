@@ -3,11 +3,7 @@ import {auth, provider} from "./config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router";
 import './login.css'
-<<<<<<< HEAD
 import Navbar from "../Navbar/Navbar";
-=======
-
->>>>>>> 2299f8688cfac3ba94ed0483da3415e6c3aa32c8
 const Login=function()
 {
     const [email,setEmail]=useState("");
@@ -32,6 +28,7 @@ const Login=function()
         else
         {
             alert('Please check your Username and Password carefully');
+            alert('Please check your Username and Password carefully');
         }
     }
     const handleClick=()=>{
@@ -46,53 +43,6 @@ const Login=function()
     })
 
     return (
-<<<<<<< HEAD
-      <div>
-        <Navbar/>
-        <div className="outer-container">
-          <div className="container-login">
-            <form onSubmit={loginUser}>
-              <h1 className="login-heading">Login</h1>
-              <div className="sub">
-                <label className="label-login">Email : </label>
-                <input
-                  value={email}
-                  onChange={function (e) {
-                    setEmail(e.target.value);
-                  }}
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                ></input>
-              </div>
-              <div className="sub">
-                <label className="label-login">Password : </label>
-                <input
-                  value={password}
-                  onChange={function (e) {
-                    setPassword(e.target.value);
-                  }}
-                  type="password"
-                  placeholder="*****"
-                  name="password"
-                ></input>
-              </div>
-              <div className="button-container">
-                <input
-                  type="submit"
-                  value="Login"
-                  className="submit-button"
-                ></input>{" "}
-              </div>
-              <hr></hr>
-              <div className="button-container">
-                <button className="google-sign-in-button" onClick={handleClick}>
-                  Sign in with Google
-                </button>
-              </div>
-            </form>
-          </div>
-=======
         <div className="login-box">
         <form className="login-form" onSubmit={loginUser}>
         <h1 className="login-head">Login</h1>
@@ -121,7 +71,6 @@ const Login=function()
         <button className="google-sign-in-button" onClick={handleClick}>
             Sign in with Google
         </button>
->>>>>>> 2299f8688cfac3ba94ed0483da3415e6c3aa32c8
         </div>
         </form>
         </div>
