@@ -3,45 +3,62 @@ import jwt from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
 import './home.css'
 import Navbar from "../Navbar/Navbar";
+
+/*global chrome*/
 function Home() {
     const navigate=useNavigate();
     const [userName,setName]=useState("");
-    const[tabid,setTab]=useState(null);
+    const [currTab,setCurrTab] = useState(null);
+    const [allTabs,setAllTabs] = useState([]);
+    const [currWindow,setCurrWindow] =useState(null);
+    const [allWindows,setAllWindows] = useState([]);
 
-
-   /*global chrome*/
 async function GetCurrentTab() {
   let queryOptions = { active: true, lastFocusedWindow: true };
-  // `tab` will either be a `tabs.Tab` instance or `undefined`.
-  let [tab] = await chrome.tabs.query(queryOptions);
-  console.log(tab);
+  let tab = await chrome.tabs.query(queryOptions);
+  console.log("CurrentTab");
+  setCurrTab(tab);
 }
-   ///addddd
-   async function toggleMuteState(tabId) {
-    const tab = await chrome.tabs.get(tabId);
-    const muted = !tab.mutedInfo.muted;
-    await chrome.tabs.update(tabId, {muted});
-    console.log(`Tab ${tab.id} is ${muted ? "muted" : "unmuted"}`);
-  }
+
   async function getCurrentWindow()
   {
     const current = await chrome.windows.getCurrent();
+    console.log("currentWindow");
     console.log(current);
+    setCurrWindow(current);
   }
-
   async function getAllWindows()
   {
     const current=await chrome.windows.getAll();
     console.log(current);
+    setWindows(current);
+    current.forEach((c)=>{
+      getTabsOfWindow(c.id);
+    })
+    console.log("hehe");
   }
-
   async function getAllTabs()
   {
-        var tabs = await chrome.tabs.query({});
-        console.log(tabs);
+        const t = await chrome.tabs.query({});
+        console.log(t);
+        setAllTabs(t);
   }
-
-
+  async function getTabsOfWindow(id)
+  {
+    let queryOptions={windowId:id}
+    const tabs=await chrome.tabs.query(queryOptions);
+    console.log("hello");
+    console.log(id);
+    console.log(tabs);
+  }
+async function setWindowsss()
+{
+  const current=await chrome.windows.getAll();
+  setWindows(current);
+  windows.forEach((id)=>{
+    getTabsOfWindow(id);
+  })
+}
 
     async function getName() {
          const req=await fetch("http://localhost:2000/api/home",{
@@ -56,7 +73,6 @@ async function GetCurrentTab() {
     useEffect(function()
     {
       const token=localStorage.getItem('token');
-
       console.log(token);
       if(token)
       {
@@ -69,17 +85,26 @@ async function GetCurrentTab() {
         else
         {
             GetCurrentTab();
+            // chrome.runtime.sendMessage({"type": "allTabs"},function(response){
+            //   console.log(response);
+            //   setTabss(response);
+            //   console.log(tabss);
+            // })
              getAllTabs();
-             getCurrentWindow();
-             getAllWindows();
-            getName();
+            //  getCurrentWindow();
+            //  getAllWindows();
+             getName();
         }
       }
     },[])
 
+    // useEffect(()=>{
+    //   console.log(tabs);
+    // },[tabs]);
+
 
   
-    const [tabs, setTabs] = useState([]);
+    
 
     function Card(props) {
         console.log(props,"props");
@@ -91,31 +116,20 @@ async function GetCurrentTab() {
             </div>
           );
     }
-    // useEffect(() => {
-    //     const listener = (message) => {
-    //       if (message.tabs) {
-    //         setTabs(message.tabs);
-    //       }
-    //     };
-    //     chrome.runtime.onMessage.addListener(listener);
-    
-    //     return () => chrome.runtime.onMessage.removeListener(listener);
-    //   }, []);
-
   return (
     <div>
       <Navbar/>
     <div className="home-box">
     <h1 className="home-name">Hello, {userName}!</h1>
     <div className="tab-list">
-        {tabs.map( (x) => (
-            <Card 
-                key={x.tab.id}
-                title={x.tab.title}
-                url={x.tab.url}
-                icon={x.tab.favIconUrl}
-            />
-        ))}
+        {tabss.map((x) => {
+            return (<Card 
+                key={x.id}
+                title={x.title}
+                url={x.url}
+                icon={x.favIconUrl}
+            />)
+        })} 
     </div>
     </div>
     </div>

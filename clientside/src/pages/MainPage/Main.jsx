@@ -9,13 +9,11 @@ function Main() {
         const token = localStorage.getItem("token");
         console.log(token);
         if (token) {
-          console.log("balle balle")
           navigate("/home");
         }
       })
     function handleRegister(){
         navigate('./register');
-
     }
     function handleLogin(){
         navigate('./login');

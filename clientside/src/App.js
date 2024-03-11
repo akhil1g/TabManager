@@ -12,7 +12,6 @@ import jwt from 'jwt-decode'
 
 
 export default function App() {
-
   return (
     <div>
       <MemoryRouter>
