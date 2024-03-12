@@ -1,13 +1,14 @@
 import React,{useState} from "react";
 import './register.css'
-
+import { useNavigate } from "react-router";
 
 const Register=function()
 {
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    
+    const navigate = useNavigate();
+
     async function registerUser(event)
     {
         event.preventDefault();
@@ -19,13 +20,19 @@ const Register=function()
             body:JSON.stringify({name,email,password}),
         });
         const data=await response.json();
+        // if(data.status==='ok')
+        // window.location.href="./login";
+
+        // console.log(data);
         if(data.status==='ok')
-        window.location.href="./login";
+        {
+            navigate("/login");
+        }
     }
     return (
         <div className="reg-box">
             <form className="reg-form" onSubmit={registerUser}>
-            <h1 className="reg-head">Register Now!</h1>
+            <span className="reg-head">Register Now!</span>
             <div className="reg-label">Name:</div>
             <input value={name} 
                     onChange={function(e){

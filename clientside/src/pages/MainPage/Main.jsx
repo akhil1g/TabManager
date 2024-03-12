@@ -1,9 +1,18 @@
 import React from "react";
-import "./Main.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";  
+import "./Main.css";
 
 function Main() {
     const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        if (token) {
+          console.log("balle balle")
+          navigate("/home");
+        }
+    })
     function handleRegister(){
         navigate('./register');
     }
@@ -11,17 +20,15 @@ function Main() {
         navigate('./login');
     }
     return (
-        <div className="main-container">
-            <div className="main-right-sec">
-                <h3 className="main-heading2">Welcome!</h3>
-                <p className="main-right-sec-para">New here? </p>
-                <p className="main-right-sec-para">Get started by creating an account with us.</p>
+        <div>
+            <div className="main-container">
+                <span className="main-head">Welcome to TabHub!</span>
+                <span className="main-right-sec-para">New here? Get started by creating <br/> an account with us.</span>
                 <button 
                     className="register-btn"
                     onClick={handleRegister}
                 >Register</button>
-                <p className="main-right-sec-para">Already an User?</p>
-                <p className="main-right-sec-para">Click below to continue.</p>
+                <span className="main-right-sec-para">Already an User? <br/> Click below to continue.</span>
                 <button 
                     className="login-btn"
                     onClick={handleLogin}

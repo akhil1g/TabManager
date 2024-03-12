@@ -1,17 +1,22 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import './navbar.css'
-const handlelogout=function()
-{
-    localStorage.removeItem('token');
-    window.location.href="/";
-}
 
-const Check=function()
+
+const Check = function()
 {
-    
-    const token=localStorage.getItem('token');
-    console.log(token);
-    if(token)
-    {
+    const navigate=useNavigate();
+    const [token, setToken] = useState(null);
+    useEffect(() => {
+        const t = localStorage.getItem('token');
+        setToken(t);
+    }, []);
+    const handlelogout = function () {
+        localStorage.removeItem('token');
+        navigate('/');
+    }
+
+    if(token) {
         return <div className="logout-button"><button className="logout" onClick={handlelogout}>Logout</button></div>;
     }
     
