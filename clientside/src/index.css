@@ -2,11 +2,8 @@
     --blue: #1e90ff;
     --bg-blue: #94cfff;
     --white: #FEFBF6    ;
-  }
-body {
-    background: linear-gradient(20deg,var(--bg-blue) 30%, var(--white) 80%);
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    font-family: "Noto Sans", sans-serif;
+}
+html,body{
+    width: 520px;
+    height: 660px;
 }

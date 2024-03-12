@@ -1,0 +1,24 @@
+.tab-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 450px;
+}
+.tab-items{
+    display: flex;
+    gap: 10px;
+}
+.tab-items:hover{
+    background-color:rgb(211, 218, 218);
+}
+.tablist-checkbox{
+    width: 20px;
+    height: 20px;
+}
+.tab-pin{
+    margin-left: auto;
+    margin-right: 10px;  
+}
+.tab-pin:hover{
+    color: rgb(13, 86, 197);
+}

@@ -1,15 +1,42 @@
 .home-box{
-    width: 100vw;
-    min-height: 100vh;
+    width: 500px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 10px;
 }
 .home-name{
-    width: max-content;
+    font-size: 20px;
+    margin-right: auto;
 }
-.tab-list{
-    width: 50%;
-    border: 2px solid;
-}
-.tab-card{
+.home-box2{
+    width: 430px;
+    margin: 10px auto 5px auto;
     display: flex;
-    flex-direction: row;
+    gap: 10px;
+}
+.grp-btn{
+    width: 100px;
+    height: 25px;
+    margin-left: auto;
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: var(--bg-blue);
+}
+.grp-btn:hover{
+    background-color: white;
+}
+.grp-popup{
+    background-color: var(--white);
+    width: 190px;
+    padding: 10px;
+    margin-top: 80px;
+    margin-left: 230px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

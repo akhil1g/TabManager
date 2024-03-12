@@ -24,6 +24,7 @@ app.post("/api/register",async function(req,res){
             password:encryptedpw,
          })
         res.json({status:'ok'});
+        console.log('registered');
     }
     catch(err)
     {
@@ -50,7 +51,7 @@ app.post("/api/login",async function(req,res){
             }
             else
             {
-                // console.log("running");
+                console.log("running");
                 return res.json({status : 'error', user: false});
             }
     }

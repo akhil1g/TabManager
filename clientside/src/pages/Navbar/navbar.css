@@ -1,36 +1,25 @@
 .nav-box {
     top: 0;
     position: sticky;
-    height: 60px;
-    width: 100vw;
+    width: 500px;
+    height: 20px;
+    padding: 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 10px;
 }
 .nav-heading {
-    height: max-content;
     width: max-content;
-    font-size: 25px;
-    margin-left: 20px;
-    font-family: "Noto Sans", sans-serif;
+    margin-right: auto;
+    font-size: 17px;
 }
 .nav-heading:hover{
     cursor: pointer;
 }
-.logout-button{
-    height: max-content;
-    width: max-content;
-    margin-right: 20px;
-}
-
 .logout{
-    padding: 5px 10px;
+    font-size: 15px;
     cursor: pointer;
-    font-size: large;
-    font-weight: 500;
-    font-family: "Noto Sans", sans-serif;
-    border: 2px solid;
-    border-radius: 25px;
+    border: 1px solid;
+    border-radius: 10px;
     background-color: var(--bg-blue);
 }
 .logout:hover{
