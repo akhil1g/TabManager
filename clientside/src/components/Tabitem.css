@@ -13,7 +13,12 @@
 }
 .tab-pin{
     margin-left: auto;
-    margin-right: 10px;  
+    margin-right: 10px; 
+    color: blue; 
+}
+.tab-unpin{
+    margin-left: auto;
+    margin-right: 10px; 
 }
 .tab-pin:hover{
     color: gold;
