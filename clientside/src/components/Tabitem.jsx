@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*global chrome*/
 import React from "react";
 import { TiPin } from "react-icons/ti";

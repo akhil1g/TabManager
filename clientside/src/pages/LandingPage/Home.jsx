@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /*global chrome*/
 import React,{useEffect, useState} from "react";
 import jwt from 'jwt-decode'
@@ -15,6 +16,8 @@ function Home() {
     const [allTabs,setAllTabs] = useState([]);
     const [currWindow,setCurrWindow] = useState(null);
     const [allWindows,setAllWindows] = useState([]);
+    const [windowsWithTabs, setWindowsWithTabs] = useState([]);
+
 
     async function GetCurrentTab() {
         let queryOptions = { active: true, lastFocusedWindow: true };
@@ -23,6 +26,7 @@ function Home() {
         setCurrTab(tab);
     }
 
+
     async function getCurrentWindow(){
         const current = await chrome.windows.getCurrent();
         console.log("currentWindow");
@@ -30,11 +34,21 @@ function Home() {
         setCurrWindow(current);
     }
 
+    
+    //Get all Windows with respective Tabs    
     async function getAllWindows(){
-        const current = await chrome.windows.getAll();
-        console.log(current);
-        setAllWindows(current);
-        current.forEach((c) => {
+        const currentwindows = await chrome.windows.getAll();
+        console.log(currentwindows);
+        const windowsData = await Promise.all(currentwindows.map(async (window) => {
+            const tabs = await chrome.tabs.query({ windowId: window.id });
+            return {
+                windowId: window.id,
+                tabs: tabs,
+            };
+        }));
+        setWindowsWithTabs(windowsData);
+        setAllWindows(currentwindows);
+        currentwindows.forEach((c) => {
             getTabsOfWindow(c.id);
         })
         console.log("hehe");
@@ -54,13 +68,23 @@ function Home() {
         console.log(tabs);
     }
 
-    async function setWindowsss(){
-        const current = await chrome.windows.getAll();
-        setAllWindows(current);
-        current.forEach((id)=>{
-            getTabsOfWindow(id);
-        })
+    //To Create New Tab
+    async function createNewTab(windowid){
+        chrome.tabs.create(
+            {active: true,
+            windowId: windowid},
+            () => console.log("new tab created with id:")
+        );
     }
+
+
+    //To Close A Tab
+    const handleTabClose = (tabId) => {
+        chrome.tabs.remove(tabId, () => {
+            console.log(`Tab ${tabId} closed successfully`);
+        });
+    };
+
 
     async function getName() {
         const req = await fetch("http://localhost:2000/api/home",{
@@ -76,16 +100,12 @@ function Home() {
     useEffect(function(){
         const token = localStorage.getItem('token');
         console.log(token);
-        if(token)
-        {
+        if(token){
             const user=jwt(token);
             console.log(user);
-            if(!user)
-            {
-            navigate.replace('/login');
-            }
-            else
-            {
+            if(!user){
+                navigate.replace('/login');
+            }else{
                 GetCurrentTab();
                 // chrome.runtime.sendMessage({"type": "allTabs"},function(response){
                 //   console.log(response);
@@ -100,34 +120,28 @@ function Home() {
                 getName();
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     // useEffect(()=>{
     //   console.log(tabs);
     // },[tabs]);
 
-    //To Close A Tab
-    const handleTabClose = (tabId) => {
-        chrome.tabs.remove(tabId, () => {
-          console.log(`Tab ${tabId} closed successfully`);
-        });
-      };
 
-  
-    
 
     
-  return (
+    return (
     <div>
         <Navbar/>
         <div className="home-box">
             <h1 className="home-name">Hello, {userName}!</h1>
-            {allWindows.map((y)=>{
+            {windowsWithTabs.map((y)=>{
                 return (
                 <div className="window-list">
-                    <span style={{fontWeight:'600',marginBottom:'2px'}}>Window ID: {y.id}</span>
+                    <span style={{fontWeight:'600',marginBottom:'5px'}}>Window ID: {y.windowId}</span>
+                    <button className="new-tab" onClick={() => createNewTab(y.windowId)}>New Tab</button>
                     <div className="tab-list">
-                    {allTabs.map((x) => {
+                    {y.tabs.map((x) => {
                         return (<Card 
                             key={x.id}
                             title={x.title}
@@ -139,8 +153,6 @@ function Home() {
                     </div>
                 </div>)})}
         </div>
-    </div>
-  );
+    </div>);
 }
-
 export default Home;
