@@ -1,12 +1,13 @@
 .main-container{
-    width: 500px;
-    height: 600px;
+    width: 380px;
+    height: 480px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
+    overflow: hidden;
 }
 .main-head{
     font-size: 30px;
@@ -21,19 +22,16 @@
 .register-btn {
     margin-top: -15px;
     font-size: 20px;
-    min-width: 120px;
+    min-width: 100px;
     cursor: pointer;
     border-radius: 10px;
-    padding: 10px; 
+    padding: 5px; 
 }
 .login-btn:hover,
 .register-btn:hover {
-
-  }
-  
-@media only screen and (max-width: 768px){
-    
+    background-color: gray;
 }
+
 
 
 

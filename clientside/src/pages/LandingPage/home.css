@@ -1,21 +1,16 @@
 .home-box{
-    width: 500px;
-    height: 600px;
+    width: 380px;
+    height: 480px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 7px;
     align-items: center;
-    padding: 10px;
+    padding: 5px;
 }
 .home-name{
-    font-size: 20px;
+    font-size: 12px;
+    font-weight: 600;
     margin-right: auto;
-}
-.home-box2{
-    width: 430px;
-    margin: 10px auto 5px auto;
-    display: flex;
-    gap: 10px;
 }
 .grp-btn{
     width: 100px;
@@ -39,4 +34,14 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+.window-list{
+    width: 370px;
+    padding: 3px;
+}
+.tab-list{
+    width: 370px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }

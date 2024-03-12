@@ -1,9 +1,8 @@
 :root {
-    --blue: #1e90ff;
-    --bg-blue: #94cfff;
-    --white: #FEFBF6    ;
+    --white: #FEFBF6;
 }
 html,body{
-    width: 520px;
-    height: 660px;
+    width: 400px;
+    height: 500px;
+    overflow: hidden;
 }

@@ -4,16 +4,23 @@
     "version" : "1.0.0",
     "manifest_version": 3,
     "action":{
-      "default_title": "Tab Manager",
+      "default_title": "Tab Manger",
       "default_popup": "index.html",
-      "default_icon": "./browser (1).ico"
+      "default_icon": "browser (1).png"
     },
     "background": {
       "persistent": false
     },
     "permissions": [
+      "activeTab",
         "storage",
         "tabs",
         "http://localhost:2000/"
-    ] 
+    ],
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>","https://*/*", "http://*/*"],
+        "js": ["content.js"]
+      }
+    ]
   }

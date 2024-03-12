@@ -1,8 +1,8 @@
 .nav-box {
     top: 0;
     position: sticky;
-    width: 500px;
-    height: 20px;
+    width: 380px;
+    height: 15px;
     padding: 10px;
     display: flex;
     gap: 10px;
@@ -10,22 +10,19 @@
 .nav-heading {
     width: max-content;
     margin-right: auto;
-    font-size: 17px;
-}
-.nav-heading:hover{
-    cursor: pointer;
+    font-size: 15px;
 }
 .logout{
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
     border: 1px solid;
     border-radius: 10px;
-    background-color: var(--bg-blue);
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
 }
-.logout:hover{
-    background-color: var(--white);
-}
-
-@media (max-width : 640px){
-    
+.nav-ele{
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
 }

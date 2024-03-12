@@ -7,6 +7,7 @@ import Main from './pages/MainPage/Main.jsx';
 import Home from './pages/LandingPage/Home.jsx'
 import Login from './pages/LoginPage/Login.jsx';
 import Register from './pages/RegisterPage/Register.jsx'
+import Group from './pages/GroupPage/Group.jsx'
 import jwt from 'jwt-decode'
 
 
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/group" element={<Group />} />
         </Routes>
       </MemoryRouter>
     </div>

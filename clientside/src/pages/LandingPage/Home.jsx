@@ -1,144 +1,144 @@
+/*global chrome*/
 import React,{useEffect, useState} from "react";
 import jwt from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
-import TabList from "../../components/TabList";
-import { MdOutlineTab } from "react-icons/md";
 import Navbar from "../Navbar/Navbar";
+import Card from "../../components/Tabitem";
 import './home.css'
 
+
 function Home() {
-    const navigate=useNavigate();
-    const [userName,setName]=useState("");
-    const[tabid,setTab]=useState(null);
-    
-    /*global chrome*/
+
+    const navigate = useNavigate();
+    const [userName,setName] = useState("");
+    const [currTab,setCurrTab] = useState(null);
+    const [allTabs,setAllTabs] = useState([]);
+    const [currWindow,setCurrWindow] = useState(null);
+    const [allWindows,setAllWindows] = useState([]);
+
     async function GetCurrentTab() {
         let queryOptions = { active: true, lastFocusedWindow: true };
-        // `tab` will either be a `tabs.Tab` instance or `undefined`.
-        let [tab] = await chrome.tabs.query(queryOptions);
-        console.log(tab);
+        let tab = await chrome.tabs.query(queryOptions);
+        console.log("CurrentTab");
+        setCurrTab(tab);
     }
-    //mute tab
-    async function toggleMuteState(tabId) {
-        const tab = await chrome.tabs.get(tabId);
-        const muted = !tab.mutedInfo.muted;
-        await chrome.tabs.update(tabId, {muted});
-        console.log(`Tab ${tab.id} is ${muted ? "muted" : "unmuted"}`);
+
+    async function getCurrentWindow(){
+        const current = await chrome.windows.getCurrent();
+        console.log("currentWindow");
+        console.log(current);
+        setCurrWindow(current);
     }
-    async function getCurrentWindow()
-    {
-      const current = await chrome.windows.getCurrent();
-      console.log(current);
+
+    async function getAllWindows(){
+        const current = await chrome.windows.getAll();
+        console.log(current);
+        setAllWindows(current);
+        current.forEach((c) => {
+            getTabsOfWindow(c.id);
+        })
+        console.log("hehe");
     }
-  
-    async function getAllWindows()
-    {
-      const current=await chrome.windows.getAll();
-      console.log(current);
+
+    async function getAllTabs(){
+        const t = await chrome.tabs.query({});
+        console.log(t);
+        setAllTabs(t);
     }
-  
-    async function getAllTabs()
-    {
-          var tabs = await chrome.tabs.query({});
-          console.log(tabs);
+
+    async function getTabsOfWindow(id){
+        let queryOptions = {windowId:id}
+        const tabs = await chrome.tabs.query(queryOptions);
+        console.log("hello");
+        console.log(id);
+        console.log(tabs);
     }
-  
-  
-  
-      async function getName() {
-           const req=await fetch("http://localhost:2000/api/home",{
-            headers: {
-              'x-access-token': localStorage.getItem('token'),
-            },
-           })
-           const data=await req.json();
-           setName(data.name)
-           console.log(data.name);
-        }
+
+    async function setWindowsss(){
+        const current = await chrome.windows.getAll();
+        setAllWindows(current);
+        current.forEach((id)=>{
+            getTabsOfWindow(id);
+        })
+    }
 
     async function getName() {
-         const req=await fetch("http://localhost:2000/api/home",{
-          headers: {
-            'x-access-token': localStorage.getItem('token'),
-          },
-         })
-         const data=await req.json();
-         setName(data.name)
-         console.log(data.name);
-      }
-  
-    useEffect(function()
-    {
-      const token=localStorage.getItem('token');
-      console.log(token);
-      if(token)
-      {
-        const user=jwt(token);
-        console.log(user);
-        if(!user)
+        const req = await fetch("http://localhost:2000/api/home",{
+        headers: {
+        'x-access-token': localStorage.getItem('token'),
+        },
+        })
+        const data = await req.json();
+        setName(data.name)
+        console.log(data.name);
+    }
+
+    useEffect(function(){
+        const token = localStorage.getItem('token');
+        console.log(token);
+        if(token)
         {
-          navigate.replace('/login');
+            const user=jwt(token);
+            console.log(user);
+            if(!user)
+            {
+            navigate.replace('/login');
+            }
+            else
+            {
+                GetCurrentTab();
+                // chrome.runtime.sendMessage({"type": "allTabs"},function(response){
+                //   console.log(response);
+                //   setTabss(response);
+                //   console.log(tabss);
+                // })
+                getAllTabs();
+                getCurrentWindow();
+                getAllWindows();
+                getTabsOfWindow();
+                // setWindowsss();
+                getName();
+            }
         }
-        else
-        {
-            GetCurrentTab();
-             getAllTabs();
-             getCurrentWindow();
-             getAllWindows();
-            getName();
-        }
-      }
     },[])
 
+    // useEffect(()=>{
+    //   console.log(tabs);
+    // },[tabs]);
+
+    //To Close A Tab
+    const handleTabClose = (tabId) => {
+        chrome.tabs.remove(tabId, () => {
+          console.log(`Tab ${tabId} closed successfully`);
+        });
+      };
 
   
-    const [tabs, setTabs] = useState([]);
-
-    function Card(props) {
-        console.log(props,"props");
-          return (
-            <div className="tab-card">
-                <input type="checkbox"></input>
-                <img alt=""></img>
-                <div className="tab-title">{props.title}</div>
-            </div>
-          );
-    }
-    // useEffect(() => {
-    //     const listener = (message) => {
-    //       if (message.tabs) {
-    //         setTabs(message.tabs);
-    //       }
-    //     };
-    //     chrome.runtime.onMessage.addListener(listener);
     
-    //     return () => chrome.runtime.onMessage.removeListener(listener);
-    //   }, []);
 
-    const [showPopup, setShowPopup] = useState(false);
-    function handleCreateGroup(){
-        setShowPopup(!showPopup);
-    }
-
+    
   return (
     <div>
         <Navbar/>
-    <div className="home-box">
-        <span className="home-name">Hello, {userName}!</span>
-        <div className="home-box2">
-        <MdOutlineTab size={25}/>
-        <span style={{fontSize:'18px'}}>Tabs</span>
-        <button className="grp-btn" onClick={handleCreateGroup}>Create Group</button>
+        <div className="home-box">
+            <h1 className="home-name">Hello, {userName}!</h1>
+            {allWindows.map((y)=>{
+                return (
+                <div className="window-list">
+                    <span style={{fontWeight:'600',marginBottom:'2px'}}>Window ID: {y.id}</span>
+                    <div className="tab-list">
+                    {allTabs.map((x) => {
+                        return (<Card 
+                            key={x.id}
+                            title={x.title}
+                            url={x.url}
+                            icon={x.favIconUrl}
+                            onCloseTab={() => handleTabClose(x.id)}
+                        />)
+                    })} 
+                    </div>
+                </div>)})}
         </div>
-        {showPopup && <div className="grp-popup">
-            <span>Enter Group Name:</span>
-            <input type="text"/>
-            <span>Select Group Color:</span>
-            <input type="color"/>
-            <button onClick={handleCreateGroup}>Done</button>
-            </div>}
-        <TabList/>
-    </div>
     </div>
   );
 }
