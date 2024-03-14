@@ -26,7 +26,6 @@ function Home() {
         setCurrTab(tab);
     }
 
-
     async function getCurrentWindow(){
         const current = await chrome.windows.getCurrent();
         console.log("currentWindow");
@@ -85,6 +84,42 @@ function Home() {
         });
     };
 
+    
+    //To Pin A Tab
+    const pinTab = (tabId) => {
+        chrome.tabs.get(tabId, (tab) => {
+            //Create a new tab with the same url and pinned properties
+            chrome.tabs.create({ 
+                url: tab.url, 
+                pinned: true,
+                windowId: tab.windowId },
+                () => console.log("new same tab created"));
+            //Close the original tab
+            chrome.tabs.remove(tabId, () => {
+                console.log("tab closed successfully");
+            });
+        })
+    }
+
+
+    //To Unpin A Tab
+    const unPinTab = (tabId) => {
+        chrome.tabs.get(tabId, (tab) => {
+            //Close the original tab
+            chrome.tabs.remove(tabId, () => {
+                console.log("tab closed successfully");
+            });
+            //Create a new tab with the same url and pinned properties
+            chrome.tabs.create({ 
+                url: tab.url, 
+                pinned: false,
+                windowId: tab.windowId },
+                () => {
+                    console.log("new same tab created");
+            });
+        })
+    }
+
 
     async function getName() {
         const req = await fetch("http://localhost:2000/api/home",{
@@ -116,7 +151,6 @@ function Home() {
                 getCurrentWindow();
                 getAllWindows();
                 getTabsOfWindow();
-                // setWindowsss();
                 getName();
             }
         }
@@ -142,12 +176,16 @@ function Home() {
                     <button className="new-tab" onClick={() => createNewTab(y.windowId)}>New Tab</button>
                     <div className="tab-list">
                     {y.tabs.map((x) => {
-                        return (<Card 
+                        return (
+                        <Card 
                             key={x.id}
                             title={x.title}
                             url={x.url}
                             icon={x.favIconUrl}
                             onCloseTab={() => handleTabClose(x.id)}
+                            handlePinToggle={() => 
+                                x.pinned ? unPinTab(x.id) : pinTab(x.id)}
+                            isPinned={x.pinned}
                         />)
                     })} 
                     </div>
@@ -155,4 +193,5 @@ function Home() {
         </div>
     </div>);
 }
+
 export default Home;

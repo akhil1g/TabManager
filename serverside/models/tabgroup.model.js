@@ -1,4 +1,4 @@
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 //creating a Tab schema
 const TabGroup=new mongoose.Schema({
     name:{type :String, required :true},

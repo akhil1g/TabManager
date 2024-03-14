@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Navigate, Route, Routes, MemoryRouter } from 'react-router-dom'
-import { useNavigate } from "react-router";
+import React from 'react';
+import {  Route, Routes, MemoryRouter } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './pages/Navbar/Navbar.jsx'
 import Main from './pages/MainPage/Main.jsx';
-import Home from './pages/LandingPage/Home.jsx'
 import Login from './pages/LoginPage/Login.jsx';
-import Register from './pages/RegisterPage/Register.jsx'
-import Group from './pages/GroupPage/Group.jsx'
-import jwt from 'jwt-decode'
+import Register from './pages/RegisterPage/Register.jsx';
+import Home from './pages/LandingPage/Home.jsx';
+import Groups from './pages/Groups/Groups.jsx';
+import YourGroups from './pages/YourGroups/YourGroups.jsx';
+
 
 
 
@@ -22,7 +21,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/group" element={<Group />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/yourgroups" element={<YourGroups/>}/>
         </Routes>
       </MemoryRouter>
     </div>

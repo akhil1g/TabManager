@@ -19,6 +19,6 @@ const Check = function()
     if(token) {
         return <div className="logout-button"><button className="logout" onClick={handlelogout}>Logout</button></div>;
     }
-    
+
 }
 export default Check;
