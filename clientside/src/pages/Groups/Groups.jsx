@@ -9,7 +9,7 @@ function Groups() {
     const navigate = useNavigate();
     const [allTabs, setAllTabs] = useState([]);
     const [groupTabs, setGroupTabs] = useState([]);
-    const [groupName, setGroupName] = useState(null);
+    const [groupName, setGroupName] = useState();
     const [groupColor, setGroupColor] = useState([]);
     const Colors = ["blue", "red", "yellow", "green", "purple"];
 
@@ -20,12 +20,13 @@ function Groups() {
         setAllTabs(t);
     }
 
+    // eslint-disable-next-line no-unused-vars
     async function createGroups() {
         let groupId = await chrome.tabs.group({ tabIds: groupTabs });
         await chrome.tabGroups.update(groupId, {
             collapsed: false,
             title: groupName,
-            color: groupColor
+            color: groupColor,
         });
     }
 
@@ -40,18 +41,19 @@ function Groups() {
         if (token) {
             const user = jwt(token);
             console.log(user);
-            if (!user) {
+            if(!user){
                 navigate.replace('/login');
-            } else {
+            }else{
                 getAllTabs();
             }
         }
     }, [navigate])
 
     useEffect(() => {
-        if (groupTabs.length > 0) {
+        if(groupTabs.length > 0) {
             createGroups();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [groupTabs]);
 
     async function handleonClick(tabId) {
@@ -64,7 +66,7 @@ function Groups() {
         <div>
             <Navbar />
             <div className="home-box">
-                <h1 className="home-name">Hello !</h1>
+                {/* Create Groups */}
                 <div className="window-list">
                     <div className="tab-list">
                         {allTabs.map((x) => {
@@ -78,28 +80,25 @@ function Groups() {
                                 />)
                         })}
                     </div>
-                </div>
-                <div>
-                    <input
-                        value={groupName}
-                        onChange={(e) => setGroupName(e.target.value)}
-                        type="text"
-                        name="groupName"
-                        className="groupname"
-                    />
-                    {
-                        Colors.map((x, index) => {
+                    <div>
+                        <input
+                            value={groupName}
+                            onChange={(e) => setGroupName(e.target.value)}
+                            type="text"
+                            name="groupName"
+                            className="groupname"
+                        />
+                        {Colors.map((x, index) => {
                             return (
-                            <button 
-                                key={index} 
-                                style={{ backgroundColor: x }} 
-                                onClick={() => handleColoronClick(x)}>
-                                    color
+                                <button 
+                                    key={index} 
+                                    style={{ backgroundColor: x }} 
+                                    onClick={() => handleColoronClick(x)}>
                                 </button>
                             );
-                        })
-                    }
-                    <button type="submit" onClick={createGroups}>Done</button>
+                        })}
+                        <button type="submit" onClick={createGroups}>Done</button>
+                    </div>
                 </div>
             </div>
         </div>

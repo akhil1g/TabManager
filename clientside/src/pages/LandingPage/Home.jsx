@@ -151,7 +151,6 @@ function Home() {
                 getCurrentWindow();
                 getAllWindows();
                 getTabsOfWindow();
-                // setWindowsss();
                 getName();
             }
         }
