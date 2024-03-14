@@ -26,7 +26,6 @@ function Home() {
         setCurrTab(tab);
     }
 
-
     async function getCurrentWindow(){
         const current = await chrome.windows.getCurrent();
         console.log("currentWindow");
@@ -178,7 +177,8 @@ function Home() {
                     <button className="new-tab" onClick={() => createNewTab(y.windowId)}>New Tab</button>
                     <div className="tab-list">
                     {y.tabs.map((x) => {
-                        return (<Card 
+                        return (
+                        <Card 
                             key={x.id}
                             title={x.title}
                             url={x.url}
@@ -194,4 +194,5 @@ function Home() {
         </div>
     </div>);
 }
+
 export default Home;

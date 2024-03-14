@@ -1,0 +1,25 @@
+.tab-card{
+    display: flex;
+    gap: 10px;
+}
+.tab-card:hover{
+    background-color:rgb(140, 143, 143);
+}
+.tab-card-checkbox{
+    width: 20px;
+    height: 20px;
+}
+.tab-title{
+    overflow: hidden;
+}
+.tab-pin{
+    margin-left: auto;
+    margin-right: 10px;  
+}
+.tab-pin:hover{
+    color: gold;
+}
+.tab-img{
+    width: 15px;
+    height: 15px;
+}

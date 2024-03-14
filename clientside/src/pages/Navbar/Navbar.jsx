@@ -19,7 +19,7 @@ export default function Navbar(){
             <img src="./browser (1).ico" alt=" " />
             <div className="nav-heading" onClick={handleonClick}>TabHub</div>
             <Link to="/home" ><div className="nav-ele">Home</div></Link>
-            <Link to="/group" ><div className="nav-ele">Groups</div></Link>
+            <Link to="/groups" ><div className="nav-ele">Groups</div></Link>
             <Link to="/" ><div className="nav-ele">Sessions</div></Link>
             <Check />
         </div>

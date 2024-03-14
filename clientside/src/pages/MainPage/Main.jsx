@@ -15,6 +15,7 @@ function Main() {
     })
     function handleRegister(){
         navigate('./register');
+
     }
     function handleLogin(){
         navigate('./login');
