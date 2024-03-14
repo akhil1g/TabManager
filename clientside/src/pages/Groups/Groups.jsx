@@ -3,7 +3,7 @@ import jwt from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 import Card from "./Tab";
-import './groups.css';
+import './Groups.css';
 
 function Groups() {
     const navigate = useNavigate();

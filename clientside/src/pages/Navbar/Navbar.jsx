@@ -20,7 +20,7 @@ export default function Navbar(){
             <div className="nav-heading" onClick={handleonClick}>TabHub</div>
             <Link to="/home" ><div className="nav-ele">Home</div></Link>
             <Link to="/groups" ><div className="nav-ele">CreateGroups</div></Link>
-            <Link to="/yourgroups" ><div className="nav-ele">yourGroups</div></Link>
+            <Link to="/yourgroups" ><div className="nav-ele">YourGroups</div></Link>
             <Link to="/" ><div className="nav-ele">Sessions</div></Link>
             <Check />
         </div>
