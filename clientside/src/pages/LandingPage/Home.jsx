@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 /*global chrome*/
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, useRef} from "react";
 import jwt from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
 import Navbar from "../Navbar/Navbar";
 import Card from '../Components/TabItem/TabItem'
+import { CiSearch } from "react-icons/ci";
 import './home.css'
 
 
@@ -18,6 +19,8 @@ function Home() {
     const [allWindows,setAllWindows] = useState([]);
     const [windowsWithTabs, setWindowsWithTabs] = useState([]);
     const [windowCount, setWindowCount] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
+    const highlightedTabRef = useRef(null);
 
 
     async function GetCurrentTab() {
@@ -156,14 +159,38 @@ function Home() {
     //   console.log(tabs);
     // },[tabs]);
 
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+        // If the search query is cleared, reset the highlighted tab ref
+        if (!e.target.value) {
+            highlightedTabRef.current = null;
+        }
+    }
 
 
-    
+    let filteredTabs = [];
+    if (searchQuery) {
+        filteredTabs = allTabs.filter(tab => {
+            return tab.title.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+    }
+
+    useEffect(() => {
+        // Scroll to the highlighted tab card when it changes
+        if (highlightedTabRef.current) {
+            highlightedTabRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [highlightedTabRef]);
+
     return (
     <div>
         <Navbar/>
         <div className="home-box">
             <h1 className="home-name">Hello, {userName}!</h1>
+            <div className="search-box">
+                <CiSearch size={17}/>
+                <input type="text" placeholder="Search Tabs..." onChange={handleSearch} autoFocus/>
+            </div>
             {windowsWithTabs.map((y, index)=>{
                 return (
                 <div className="window-list">
@@ -175,6 +202,10 @@ function Home() {
                     </div>
                     <div className="tab-list">
                     {y.tabs.map((x) => {
+                        // Determine if the tab should be highlighted
+                        const highlight = filteredTabs.some(filteredTab => filteredTab.id === x.id);
+                        // Set ref to the highlighted tab card
+                        const ref = highlight ? highlightedTabRef : null;
                         return (
                         <Card 
                             id={x.id}
@@ -185,6 +216,10 @@ function Home() {
                             handlePinToggle={() => 
                                 x.pinned ? unPinTab(x.id) : pinTab(x.id)}
                             isPinned={x.pinned}
+                            //Highlight the tab if it matches the search query
+                            highlight={highlight}
+                            //Pass ref to the highlighted tab card
+                            ref={ref}
                         />)
                     })} 
                     </div>
