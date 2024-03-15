@@ -1,13 +1,16 @@
 .tab-card{
     width: 100%;
+    height: 17px;
     display: flex;
     align-items: center;
     gap: 3px;
-    height: 17px;
     border-radius: 5px;
+    &:hover{
+        background-color:rgb(140, 143, 143);
+    }
 }
-.tab-card:hover{
-    background-color:rgb(140, 143, 143);
+.tab-card.highlight{
+    background-color: rgb(255, 123, 0);
 }
 .tab-check{
     width: 15px;
@@ -16,6 +19,7 @@
 .tab-img{
     height: 15px;
     width: 15px;
+    margin-left: 3px;
 }
 .tab-title{
     width:300px;
@@ -24,12 +28,12 @@
 }
 .tab-pin{
     align-self: flex-end; 
-    &::hover{
-        color: gold;
-    }
+    color: rgb(32, 105, 242);
 }
 .tab-unpin{
     margin-left: auto;
     margin-right: 10px; 
 }
-
+.tab-close:hover{
+    color:rgb(238, 168, 5)
+}
