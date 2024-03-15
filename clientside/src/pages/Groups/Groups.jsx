@@ -74,6 +74,7 @@ function Groups() {
         <div>
             <Navbar />
             <div className="home-box">
+                <YourGroups/>
                 <div className="box1">
                     <span>Total Tabs: {allTabs.length}</span>
                     <button className="grp-btn" onClick={handleGroupPopup}>Create Group</button>
