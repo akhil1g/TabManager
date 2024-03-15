@@ -61,11 +61,45 @@ function Groups() {
         setGroupTabs([...groupTabs, tabId]);
         // const result = await new Promise(resolve => setTimeout(() => resolve('resolved'), 2000));
     }
-
+    
+    const [showPopup, setShowPopup] = useState(false);
+    function handleGroupPopup(){
+        setShowPopup(!showPopup);
+    }
+    function handleDone(){
+        setShowPopup(false);
+    }
     return (
         <div>
             <Navbar />
             <div className="home-box">
+                <div className="box1">
+                    <span>Total Tabs: {allTabs.length}</span>
+                    <button className="grp-btn" onClick={handleGroupPopup}>Create Group</button>
+                    {showPopup && 
+                    <div className="grp-popup">
+                        <input
+                            value={groupName}
+                            onChange={(e) => setGroupName(e.target.value)}
+                            type="text"
+                            name="groupName"
+                            className="groupname"
+                            placeholder="Group Name"
+                        />
+                        <div className="grp-color">
+                            {Colors.map((x, index) => {
+                                return (
+                                    <button 
+                                        key={index} 
+                                        className="color-btn"
+                                        style={{ backgroundColor: x }} 
+                                        onClick={() => handleColoronClick(x)}>
+                                    </button>
+                                );
+                            })}</div>
+                        <button type="submit" className="done-btn" onClick={createGroups} >Done</button>
+                    </div>}
+                </div>
                 {/* Create Groups */}
                 <div className="window-list">
                     <div className="tab-list">
@@ -79,25 +113,6 @@ function Groups() {
                                     fun={() => handleonClick(x.id)}
                                 />)
                         })}
-                    </div>
-                    <div>
-                        <input
-                            value={groupName}
-                            onChange={(e) => setGroupName(e.target.value)}
-                            type="text"
-                            name="groupName"
-                            className="groupname"
-                        />
-                        {Colors.map((x, index) => {
-                            return (
-                                <button 
-                                    key={index} 
-                                    style={{ backgroundColor: x }} 
-                                    onClick={() => handleColoronClick(x)}>
-                                </button>
-                            );
-                        })}
-                        <button type="submit" onClick={createGroups}>Done</button>
                     </div>
                 </div>
             </div>

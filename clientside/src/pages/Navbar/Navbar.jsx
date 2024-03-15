@@ -16,12 +16,11 @@ export default function Navbar(){
    
     return (
         <div className="nav-box">
-            <img src="./browser (1).ico" alt=" " />
+            <img src="./browser (1).ico" className="nav-icon" alt=" " />
             <div className="nav-heading" onClick={handleonClick}>TabHub</div>
-            <Link to="/home" ><div className="nav-ele">Home</div></Link>
-            <Link to="/groups" ><div className="nav-ele">CreateGroups</div></Link>
-            <Link to="/yourgroups" ><div className="nav-ele">YourGroups</div></Link>
-            <Link to="/" ><div className="nav-ele">Sessions</div></Link>
+            <Link to="/home" className="nav-ele" >Home</Link>
+            <Link to="/groups" className="nav-ele">Groups</Link>
+            <Link to="/sessions" className="nav-ele">Sessions</Link>
             <Check />
         </div>
     );

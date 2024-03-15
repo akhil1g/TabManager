@@ -1,47 +1,70 @@
 .home-box{
-    width: 380px;
-    height: 480px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
     align-items: center;
-    padding: 5px;
 }
-.home-name{
-    font-size: 12px;
-    font-weight: 600;
-    margin-right: auto;
+.box1{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.box1 span{
+    width: fit-content;
+    margin-left: 5px;
+    font-weight: 500px;
 }
 .grp-btn{
     width: 100px;
     height: 25px;
-    margin-left: auto;
+    margin-right: 5px;
     cursor: pointer;
     border: 1px solid;
-    border-radius: 10px;
-    background-color: var(--bg-blue);
-}
-.grp-btn:hover{
-    background-color: white;
+    border-radius: 5px;
+    background-color: rgb(57, 139, 233);
+    &:hover{
+        background-color: white;
+    }
 }
 .grp-popup{
-    background-color: var(--white);
     width: 190px;
-    padding: 10px;
-    margin-top: 80px;
-    margin-left: 230px;
+    padding: 5px;
     position: absolute;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
 }
-.window-list{
-    width: 370px;
-    padding: 3px;
+.grp-color{
+    display: flex;
+    gap: 4px;
 }
-.tab-list{
-    width: 370px;
+.color-btn{
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    &:hover{
+        -webkit-box-shadow: 0 0 7px 11.5px #c5c1c1;
+        -moz-box-shadow: 0 0 7px 11.5px #c5c1c1;   
+        box-shadow: 0 0 7px 11.5px #c5c1c1;
+    }
+}
+.done-btn{
+    width: fit-content;
+    font-size: 12px;
+}
+.window-list{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+}
+.tab-list{
+    padding: 5px;
+    padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

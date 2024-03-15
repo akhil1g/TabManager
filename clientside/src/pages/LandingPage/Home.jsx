@@ -4,7 +4,7 @@ import React,{useEffect, useState} from "react";
 import jwt from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
 import Navbar from "../Navbar/Navbar";
-import Card from "../../components/Tabitem";
+import Card from '../Components/TabItem/TabItem'
 import './home.css'
 
 
@@ -17,6 +17,7 @@ function Home() {
     const [currWindow,setCurrWindow] = useState(null);
     const [allWindows,setAllWindows] = useState([]);
     const [windowsWithTabs, setWindowsWithTabs] = useState([]);
+    const [windowCount, setWindowCount] = useState(0);
 
 
     async function GetCurrentTab() {
@@ -50,6 +51,8 @@ function Home() {
         currentwindows.forEach((c) => {
             getTabsOfWindow(c.id);
         })
+        //Update window count
+        setWindowCount(currentwindows.length)
         console.log("hehe");
     }
 
@@ -169,16 +172,20 @@ function Home() {
         <Navbar/>
         <div className="home-box">
             <h1 className="home-name">Hello, {userName}!</h1>
-            {windowsWithTabs.map((y)=>{
+            {windowsWithTabs.map((y, index)=>{
                 return (
                 <div className="window-list">
-                    <span style={{fontWeight:'600',marginBottom:'5px'}}>Window ID: {y.windowId}</span>
-                    <button className="new-tab" onClick={() => createNewTab(y.windowId)}>New Tab</button>
+                    <div className="window-dets">
+                        <span>Window: {index + 1}</span>
+                        <button className="new-tab-btn" 
+                                onClick={() => createNewTab(y.windowId)}>New Tab
+                        </button>
+                    </div>
                     <div className="tab-list">
                     {y.tabs.map((x) => {
                         return (
                         <Card 
-                            key={x.id}
+                            id={x.id}
                             title={x.title}
                             url={x.url}
                             icon={x.favIconUrl}
