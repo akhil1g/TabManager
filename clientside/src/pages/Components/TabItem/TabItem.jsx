@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect,useRef} from "react";
 import { TiPin } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
 import './Tabitem.css'
@@ -7,6 +7,10 @@ import './Tabitem.css'
 function Card(props) {
     
     const [selectedTabs,setSelectedTabs] = useState([]);
+    const [isPinned, setIsPinned] = useState(false);
+    const { highlight } = props;
+    const cardRef = useRef(null);
+
     console.log(props,"props");
     const handleChange = e => {
         const {value,checked} = e.target;
@@ -15,24 +19,34 @@ function Card(props) {
           props.childtoparent(value);
         } else {
         }
-      }
+    }
 
-    const [isPinned, setIsPinned] = useState(false);
+    
     //Update the pin state
-    useEffect(() => {setIsPinned(props.isPinned);}, [props.isPinned])
+    useEffect(() => {setIsPinned(props.isPinned);}, [props.isPinned])   
+
+
+    // Scroll to this card when it's highlighted
+    useEffect(() => {
+        if (highlight) {
+            cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+        }
+    }, [highlight]);
+
 
     return (
-        <div className="tab-card">
-            <input type="checkbox"
+        <div ref={cardRef} 
+             className={`tab-card ${highlight ? 'highlight' : ''}`}>
+            {/* <input type="checkbox"
                 value={props}
                 onChange={handleChange}
-                className="tab-check"></input>
+                className="tab-check"></input> */}
             <img alt="" src={props.icon} className="tab-img"/>
             <div className="tab-title">{props.title}</div>
             <TiPin 
                 className={`${isPinned ? 'tab-pin' : 'tab-unpin'}`}
                 onClick={props.handlePinToggle} size={20}/>
-            <IoCloseSharp onClick={props.onCloseTab} className="tab-close" size={20}/>
+            <IoCloseSharp size={20} className="tab-close" onClick={props.onCloseTab}/>
         </div>
     );
 }
