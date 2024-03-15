@@ -1,47 +1,45 @@
 .home-box{
-    width: 100%;
-    height: 480px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
     align-items: center;
-    padding: 5px;
 }
 .home-name{
     font-size: 12px;
     font-weight: 600;
     margin-right: auto;
 }
-.grp-btn{
-    width: 100px;
-    height: 25px;
-    margin-left: auto;
-    cursor: pointer;
-    border: 1px solid;
-    border-radius: 10px;
-    background-color: var(--bg-blue);
-}
-.grp-btn:hover{
-    background-color: white;
-}
-.grp-popup{
-    background-color: var(--white);
-    width: 190px;
-    padding: 10px;
-    margin-top: 80px;
-    margin-left: 230px;
-    position: absolute;
+.window-list{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
-.window-list{
-    width: 370px;
-    padding: 3px;
+.window-dets{
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 2px;
+}
+.window-dets span{
+    font-weight:600;
+    margin-left: 5px;
+    width: fit-content;
+}
+.new-tab-btn{
+    margin-left: auto;
+    margin-right: -2px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 0.5px solid;
+    border-radius: 5px;
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
 }
 .tab-list{
-    width: 370px;
+    padding: 5px;
+    padding-bottom: 4px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    justify-content: center;
+    align-items: center;
 }

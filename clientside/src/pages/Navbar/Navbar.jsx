@@ -16,7 +16,7 @@ export default function Navbar(){
    
     return (
         <div className="nav-box">
-            <img src="./browser (1).ico" alt=" " />
+            <img src="./browser (1).ico" className="nav-icon" alt=" " />
             <div className="nav-heading" onClick={handleonClick}>TabHub</div>
             <Link to="/home" ><div className="nav-ele">Home</div></Link>
             <Link to="/groups" ><div className="nav-ele">Groups</div></Link>

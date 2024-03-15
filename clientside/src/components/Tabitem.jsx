@@ -17,7 +17,7 @@ function Card(props) {
     return (
         <div className="tab-card">
             <input type="checkbox"></input>
-            <img alt=""></img>
+            <img alt="" src={props.icon} className="tab-img"/>
             <div className="tab-title">{props.title}</div>
             <TiPin 
                 className={`${isPinned ? 'tab-pin' : 'tab-unpin'}`}
