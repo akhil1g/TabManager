@@ -91,13 +91,11 @@ function Home() {
     //To Pin A Tab
     const pinTab = (tabId) => {
         chrome.tabs.get(tabId, (tab) => {
-            //Create a new tab with the same url and pinned properties
             chrome.tabs.create({ 
                 url: tab.url, 
                 pinned: true,
                 windowId: tab.windowId },
                 () => console.log("new same tab created"));
-            //Close the original tab
             chrome.tabs.remove(tabId, () => {
                 console.log("tab closed successfully");
             });
@@ -108,11 +106,9 @@ function Home() {
     //To Unpin A Tab
     const unPinTab = (tabId) => {
         chrome.tabs.get(tabId, (tab) => {
-            //Close the original tab
             chrome.tabs.remove(tabId, () => {
                 console.log("tab closed successfully");
             });
-            //Create a new tab with the same url and pinned properties
             chrome.tabs.create({ 
                 url: tab.url, 
                 pinned: false,
@@ -144,12 +140,8 @@ function Home() {
             if(!user){
                 navigate.replace('/login');
             }else{
+
                 GetCurrentTab();
-                // chrome.runtime.sendMessage({"type": "allTabs"},function(response){
-                //   console.log(response);
-                //   setTabss(response);
-                //   console.log(tabss);
-                // })
                 getAllTabs();
                 getCurrentWindow();
                 getAllWindows();

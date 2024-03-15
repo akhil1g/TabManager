@@ -2,9 +2,11 @@ const express=require("express");
 const mongoose=require("mongoose");
 const cors=require("cors")
 const User=require('./models/user.model');
+const Sessions = require('./models/Sessions2.model')
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
 const authMiddleware = require('./authmiddleware');
+const { func } = require("prop-types");
 const app=express();
 app.use(cors());
 app.use(express.json());
@@ -63,7 +65,7 @@ app.post("/api/login",async function(req,res){
 })
 
 
-app.get("/api/home",authMiddleware,async function(req,res){
+app.get("/api/home",async function(req,res){
 try{
     const token=req.headers["x-access-token"];
    const decoded=jwt.verify(token,'secretkey');
@@ -78,12 +80,40 @@ try{
     console.log(err);
     res.json({status:"error",error:"invalid-token"})
  }
-   
+});
+ 
+
+app.post("/api/savesession",async function(req,res){
+    console.log(req.body);
+    try{
+            const session=await Sessions.create({     
+            email:req.body.email,
+            windowIds : req.body.allWindows, 
+            tabs : req.body.allTabs,
+            date: req.body.date
+            })
+        res.json({status:'ok'});
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
+})
+
+
+
+app.post("/api/restoresessions", async function (req, res) {
+    try{
+        const {email} = req.body;
+        const data = await Sessions.find({email});
+        res.json({ data });
+    }catch(err) {
+        console.log(err);
+        res.json({ status: "error" });
+    }
 });
 
 
-
-
 app.listen(2000,function(){
-    console.log("server is running at port 3000");
+    console.log("server is running at port 2000");
 });

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar/Navbar";
 import Card from "./Tab";
 import './Groups.css';
+import YourGroups from "../YourGroups/YourGroups";
 
 function Groups() {
     const navigate = useNavigate();
@@ -102,6 +103,7 @@ function Groups() {
                 </div>
                 {/* Create Groups */}
                 <div className="window-list">
+                    <div>Create A Group : </div>
                     <div className="tab-list">
                         {allTabs.map((x) => {
                             return (
