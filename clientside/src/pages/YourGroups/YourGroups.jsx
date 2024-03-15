@@ -24,13 +24,17 @@
 
         async function handleCollapse(groupId, collapsed) {
             try {
-                //Update the collapse state of the tab group
                 console.log(collapsed);
                 console.log(groupId);
                 await chrome.tabGroups.update(groupId, { collapsed });
-                console.log(`Tab group ${groupId} collapsed: ${collapsed}`);
-            } catch (error) {
-                console.error('Error occurred while updating tab group collapse state:', error);
+                setAllGroups(prevGroups => prevGroups.map(group => {
+                    if (group.id === groupId) {
+                        return { ...group, collapsed };
+                    }
+                    return group;
+                }));
+            } catch (err) {
+                console.log( err);
             }
         }
 
@@ -41,6 +45,7 @@
                 console.log(tab.id);
                 chrome.tabs.remove(tab.id);
             })
+            setAllGroups(prevGroups => prevGroups.filter(group => group.id !== groupid));
         }
 
         return (
