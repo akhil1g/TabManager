@@ -3,7 +3,10 @@ const SessionInfo = new mongoose.Schema({
     email: { type: String, required: true },
     windowIds: [{ type: String }],
     tabs: [{ 
-        url : String
+        title : String,
+        id : String,
+        url : String,
+        pinned : Boolean
      }],
     date: {type : String, required: true}
 }

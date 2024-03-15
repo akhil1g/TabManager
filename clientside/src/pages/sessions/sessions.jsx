@@ -3,6 +3,7 @@ import './sessions.css'
 import { useNavigate } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import jwt from 'jwt-decode'
+import Restore from './Restore/Restore'
 
 
 const Sessions = function()
@@ -13,14 +14,19 @@ const Sessions = function()
     const [saved,setSaved]=useState(false);
     const [date,setDate]=useState('');
     const [allTabs,setAllTabs] = useState([]);
+    const [allWindows,setAllWindows] = useState([]);
 
-
-
-    
+    async function getAllWindows(){
+        const currentwindows = await chrome.windows.getAll();
+        console.log(currentwindows);
+        const windows= currentwindows.map(window=>window.id);
+        console.log(windows);
+        setAllWindows(windows);
+    }
 
     async function getAllTabs(){
         const t = await chrome.tabs.query({});
-        const tabInfo = t.map(tab =>({ title: tab.title, url: tab.url}));
+        const tabInfo = t.map(tab =>({ title : tab.title,id: tab.windowId , url: tab.url, pinned : tab.pinned}));
         console.log(tabInfo);
         setAllTabs(tabInfo);
     }
@@ -35,7 +41,7 @@ const Sessions = function()
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({ email,date,allTabs}),
+            body:JSON.stringify({ email,allWindows,allTabs,date}),
         });
         const data=await response.json();
         if(data.status=="ok")
@@ -65,6 +71,7 @@ const Sessions = function()
                 setDate(dt);
                 setMail(user.email);
                 getAllTabs();
+                getAllWindows();
             }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,6 +89,7 @@ const Sessions = function()
                 <button className="save-session-btn" onClick={handleSave}>
                     Save Session
                 </button>
+                {/* <Restore/> */}
             </div>
         </div>
     );
