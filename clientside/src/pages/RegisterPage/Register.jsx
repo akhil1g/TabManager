@@ -20,10 +20,6 @@ const Register=function()
             body:JSON.stringify({name,email,password}),
         });
         const data=await response.json();
-        // if(data.status==='ok')
-        // window.location.href="./login";
-
-        // console.log(data);
         if(data.status==='ok')
         {
             navigate("/login");

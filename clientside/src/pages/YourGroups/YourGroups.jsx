@@ -1,6 +1,5 @@
     import React, { useEffect, useState } from "react";
     import { useNavigate } from 'react-router-dom';
-    import Navbar from "../Navbar/Navbar";
     import GroupCard from './GroupCard'
     import './YourGroups.css'
 
@@ -50,9 +49,9 @@
 
         return (
             <div>
-                <Navbar/>
-                <div className="home-box">
+                {/* <div className="home-box"> */}
                     {/* Preview all Groups */}
+                    <div className="your-groups"> Created Groups : 
                     <div className="tab-list">
                         {allgroups.map((x)=>{
                             return (
@@ -69,8 +68,8 @@
                             );
                         })}
                     </div>
+                    </div>
                 </div>
-            </div>
         );
     }
 
