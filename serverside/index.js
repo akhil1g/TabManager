@@ -106,7 +106,7 @@ app.post("/api/restoresessions", async function (req, res) {
     try{
         const {email} = req.body;
         const data = await Sessions.find({email});
-        res.json({ status: "ok", data });
+        res.json({ data });
     }catch(err) {
         console.log(err);
         res.json({ status: "error" });
