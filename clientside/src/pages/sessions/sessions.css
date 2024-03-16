@@ -1,0 +1,26 @@
+.home4-box{
+    width: 380px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+.home4-box::-webkit-scrollbar {
+    display: none;
+}
+.ses-options{
+    display: flex;
+    justify-content: space-around;
+}
+.ses-options span{
+    font-size: 14px;
+}
+.ses-options button{
+    margin-left: 5px;
+    font-size: 14px;
+}
+

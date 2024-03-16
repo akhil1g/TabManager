@@ -1,76 +1,74 @@
-    import React, { useEffect, useState } from "react";
-    import { useNavigate } from 'react-router-dom';
-    import GroupCard from './GroupCard'
-    import './YourGroups.css'
+/*global chrome*/
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import Card from './Card'
+import './YourGroups.css'
 
-    function YourGroups() {
+function YourGroups() {
+    
+    const [allgroups, setAllGroups] = useState([]);
 
-        const navigate = useNavigate();
-        const [allgroups, setAllGroups] = useState([]);
-
-        /*global chrome*/
-        // eslint-disable-next-line no-unused-vars
-        async function getAllgroups(){
-            const g = await chrome.tabGroups.query({});
-            console.log(g);
-            setAllGroups(g);
-        }
-
-
-        useEffect(function () {
-            getAllgroups();
-        },[])
-
-        async function handleCollapse(groupId, collapsed) {
-            try {
-                console.log(collapsed);
-                console.log(groupId);
-                await chrome.tabGroups.update(groupId, { collapsed });
-                setAllGroups(prevGroups => prevGroups.map(group => {
-                    if (group.id === groupId) {
-                        return { ...group, collapsed };
-                    }
-                    return group;
-                }));
-            } catch (err) {
-                console.log( err);
-            }
-        }
-
-        async function handleGroupClose(groupid){
-            console.log(groupid);
-            const tabs=await chrome.tabs.query({groupId: groupid});
-            tabs.forEach((tab)=>{
-                console.log(tab.id);
-                chrome.tabs.remove(tab.id);
-            })
-            setAllGroups(prevGroups => prevGroups.filter(group => group.id !== groupid));
-        }
-
-        return (
-            <div>
-                {/* <div className="home-box"> */}
-                    {/* Preview all Groups */}
-                    <div className="your-groups"> Created Groups : 
-                    <div className="tab-list">
-                        {allgroups.map((x)=>{
-                            return (
-                                <GroupCard
-                                    id={x.id}
-                                    title={x.title}
-                                    color={x.color}
-                                    collapsed={x.collapsed}
-                                    handleGroupCollapse={()=>
-                                        x.collapsed===true ? handleCollapse(x.id,false)
-                                        : handleCollapse(x.id,true)}
-                                    onCloseGroup={() => handleGroupClose(x.id)}
-                                />
-                            );
-                        })}
-                    </div>
-                    </div>
-                </div>
-        );
+    
+    async function getAllgroups(){
+        const g = await chrome.tabGroups.query({});
+        console.log(g);
+        setAllGroups(g);
     }
 
-    export default YourGroups;
+
+    useEffect(function () {
+        getAllgroups();
+    },[])
+
+
+    async function handleCollapse(groupId, collapsed) {
+        try {
+            console.log(collapsed);
+            console.log(groupId);
+            await chrome.tabGroups.update(groupId, { collapsed });
+            setAllGroups(prevGroups => prevGroups.map(group => {
+                if (group.id === groupId) {
+                    return { ...group, collapsed };
+                }
+                return group;
+            }));
+        } catch (err) {
+            console.log( err);
+        }
+    }
+
+
+    async function handleGroupClose(groupid){
+        console.log(groupid);
+        const tabs=await chrome.tabs.query({groupId: groupid});
+        tabs.forEach((tab)=>{
+            console.log(tab.id);
+            chrome.tabs.remove(tab.id);
+        })
+        setAllGroups(prevGroups => prevGroups.filter(group => group.id !== groupid));
+    }
+
+    let len = allgroups.length;
+    return (
+        <div className="tab3-list">
+            <span>Total Groups: {len}</span>
+            {len===0 ? (<div className="no-grp">No groups found :( </div>) 
+            : (allgroups.map((x)=>{
+                return (
+                    <Card
+                        id={x.id}
+                        title={x.title}
+                        color={x.color}
+                        collapsed={x.collapsed}
+                        handleGroupCollapse={()=>
+                            x.collapsed===true ? handleCollapse(x.id,false)
+                            : handleCollapse(x.id,true)}
+                        onCloseGroup={() => handleGroupClose(x.id)}
+                    />
+                );
+            }))}
+        </div>
+    );
+}
+
+export default YourGroups;
