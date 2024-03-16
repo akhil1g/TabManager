@@ -4,8 +4,6 @@ import { useNavigate } from "react-router";
 import jwt from 'jwt-decode'
 import Card from './Card';
 import './Restore.css'
-import Navbar from '../../Navbar/Navbar';
-
 
 const Restore=function(){
 
@@ -82,7 +80,6 @@ const Restore=function(){
 
     return (
         <div>
-            <Navbar/>
             <div className="restore-heading">Restore Sessions : </div> 
                 <div>
                     {sessions.map((session) => {

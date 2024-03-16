@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/groups" element={<Groups />} />
-          <Route path="/sessions" element = {<Restore/>}/>
+          <Route path="/sessions" element = {<Sessions/>}/>
         </Routes>
       </MemoryRouter>
     </div>

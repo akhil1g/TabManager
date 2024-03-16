@@ -89,7 +89,7 @@ const Sessions = function()
                 <button className="save-session-btn" onClick={handleSave}>
                     Save Session
                 </button>
-                {/* <Restore/> */}
+                <Restore/>
             </div>
         </div>
     );

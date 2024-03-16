@@ -9,6 +9,7 @@
       "default_icon": "browser (1).png"
     },
     "background": {
+      "service_worker": "./background.js",
       "persistent": false
     },
     "permissions": [
