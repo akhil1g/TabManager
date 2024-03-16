@@ -7,7 +7,6 @@ import Register from './pages/RegisterPage/Register.jsx';
 import Home from './pages/LandingPage/Home.jsx';
 import Groups from './pages/Groups/Groups.jsx';
 import Sessions from './pages/sessions/sessions.jsx';
-import Restore from './pages/sessions/Restore/Restore.jsx'
 
 export default function App() {
 
@@ -20,7 +19,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/groups" element={<Groups />} />
-          <Route path="/sessions" element = {<Restore/>}/>
+          <Route path="/sessions" element = {<Sessions/>}/>
         </Routes>
       </MemoryRouter>
     </div>

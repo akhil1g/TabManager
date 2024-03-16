@@ -1,0 +1,22 @@
+.grp2-card{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.grp2-card:hover{
+    background-color:rgb(140, 143, 143);
+}
+.grp2-color{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.grp2-title{
+    width:300px;
+    height: 18px;
+    overflow: hidden;
+}
+.grp2-close:hover{
+    color:rgb(238, 168, 5)
+}

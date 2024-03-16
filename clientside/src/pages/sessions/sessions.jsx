@@ -85,11 +85,12 @@ const Sessions = function()
     return (
         <div>
             <Navbar/>
-            <div className="home-box">
-                <button className="save-session-btn" onClick={handleSave}>
-                    Save Session
-                </button>
-                {/* <Restore/> */}
+            <div className="home4-box">
+                <div className="ses-options">
+                    <span>Want to save current sessions ?</span>
+                    <button className="save-session-btn" onClick={handleSave}>Save</button>
+                </div>
+                <Restore/>
             </div>
         </div>
     );

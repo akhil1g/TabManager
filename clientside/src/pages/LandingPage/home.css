@@ -1,15 +1,18 @@
 .home-box{
-    width: 400px;
+    width: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    gap: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
 }
 .home-box::-webkit-scrollbar {
     display: none;
 }
 .home-name{
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     margin-right: auto;
 }
@@ -31,15 +34,15 @@
     margin-left: 2px;
 }
 .window-list{
-    width: 100%;
+    width: 95%;
     max-height: 200px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
 }
 .window-dets{
     display: flex;
-    justify-content: space-between; 
-    margin-bottom: 2px;
+    justify-content: space-between;
 }
 .window-dets span{
     font-weight:600;
@@ -48,7 +51,8 @@
 }
 .new-tab-btn{
     margin-left: auto;
-    margin-right: -2px;
+    margin-right: 5px;
+    margin-bottom: 2px;
     font-size: 12px;
     cursor: pointer;
     border: 0.5px solid;
@@ -59,11 +63,11 @@
 }
 .tab-list{
     max-height: 150px;
-    padding: 5px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    gap: 5px;
     overflow-y: auto;
     overflow-x: hidden;
 }

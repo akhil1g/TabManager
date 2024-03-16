@@ -2,18 +2,13 @@ import React from "react";
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import jwt from 'jwt-decode'
-import Card from './Card';
 import './Restore.css'
-import Navbar from '../../Navbar/Navbar';
 
 
 const Restore=function(){
 
     /*global chrome*/
     const navigate = useNavigate();
-    // const [allWindows,setAllWindows] = useState([]);
-    // const [allTabs,setAllTabs]=useState([]);
-    // const [sessiondate,setSessionDate]=useState('');
     const [sessions,setSessions]=useState([]);
 
 
@@ -81,30 +76,29 @@ const Restore=function(){
     
 
     return (
-        <div>
-            <Navbar/>
-            <div className="restore-heading">Restore Sessions : </div> 
-                <div>
-                    {sessions.map((session) => {
-                        return(
-                            <div>
-                            <span>{session.date}</span>
-                            <button className="restore-btn" onClick={() => handleRestore(session.windowIds, session.tabs)}>Restore</button>
-                            {session.windowIds.map((y) => {
-                                return (
-                                <div>
-                                    {session.tabs.filter(tab => tab.id === y).map((tab) => {
-                                        return (<Card
-                                            title={tab.title}
-                                        />)
-                                        })}
-                                </div>
-                            )})}
-                            </div>
-                        )
-                    })}
-                    
-                </div>
+        <div className="box4">
+            {sessions.map((session) => {
+                return(
+                    <div className="ses-box">
+                        <div className="ses-dets">
+                            <span>Session: {session.date}</span>
+                            <button className="restore-btn" 
+                                    onClick={() => handleRestore(session.windowIds, session.tabs)}>Restore</button>
+                        </div>
+                        {session.windowIds.map((y,index) => {
+                            return (
+                            <div className="win-div">
+                                <span>Window: {index+1}</span>
+                                <div className="line3"></div>
+                                {session.tabs.filter(tab => tab.id === y).map((tab) => {
+                                    return (
+                                        <div className="ses-tab-title"># {tab.title}</div>
+                                    )
+                                })}
+                            </div>)
+                        })}
+                    </div>)
+            })}
         </div>
     );
 }

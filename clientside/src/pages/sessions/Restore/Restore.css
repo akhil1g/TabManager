@@ -1,0 +1,45 @@
+.box4{
+    width: 98%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1xp solid black;
+    border-radius: 5px;
+}
+.ses-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5px;
+}
+.ses-dets{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.ses-dets span{
+
+}
+.restore-btn{
+
+}
+.win-div{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+.win-div span{
+
+}
+.line3{
+    width: 100%;
+    height: 0;
+    border: 0.3px solid;
+}
+.ses-tab-title{
+    font-size: 10px;
+}
+

@@ -1,70 +1,26 @@
-.home-box{
-    width: 400px;
+.home-grp-box{
+    width: 380px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-.box1{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.box1 span{
-    width: fit-content;
-    margin-left: 5px;
-    font-weight: 500px;
-}
-.grp-btn{
-    width: 100px;
-    height: 25px;
-    margin-right: 5px;
-    cursor: pointer;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: rgb(57, 139, 233);
-    &:hover{
-        background-color: white;
-    }
-}
-.grp-popup{
-    width: 190px;
-    padding: 5px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
 }
-.grp-color{
+.box-options{
     display: flex;
-    gap: 4px;
+    justify-content: center;
 }
-.color-btn{
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+.box-options span{
+    font-size: 17px;
+    margin: 5px 5px 0 5px;
     &:hover{
-        -webkit-box-shadow: 0 0 7px 11.5px #c5c1c1;
-        -moz-box-shadow: 0 0 7px 11.5px #c5c1c1;   
-        box-shadow: 0 0 7px 11.5px #c5c1c1;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
     }
 }
-.done-btn{
-    width: fit-content;
-    font-size: 12px;
-}
-.window-list{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.tab-list{
-    padding: 5px;
-    padding-bottom: 4px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.line{
+    width: 95%;
+    height: 0px;
+    border: 1.5px solid black;
 }

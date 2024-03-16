@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 /*global chrome*/
 import React,{useEffect, useState, useRef} from "react";
-import jwt from 'jwt-decode'
 import {useNavigate} from 'react-router-dom'
+import jwt from 'jwt-decode'
 import Navbar from "../Navbar/Navbar";
-import Card from '../Components/TabItem/TabItem'
+import Card from '../Components/TabItem'
 import { CiSearch } from "react-icons/ci";
 import './home.css'
 
