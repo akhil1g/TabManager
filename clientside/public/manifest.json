@@ -12,6 +12,14 @@
       "service_worker": "./background.js",
       "persistent": false
     },
+    "commands": {
+      "pinTab": {
+        "suggested_key": {
+          "default": "Ctrl+Y"
+        },
+        "description": "Pin the active tab"
+      }
+    },
     "permissions": [
       "activeTab",
         "storage",
