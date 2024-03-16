@@ -25,3 +25,22 @@ chrome.commands.onCommand.addListener(function(command) {
       });
     }
   });
+
+
+  // function to unpin the active tab
+chrome.commands.onCommand.addListener(function(command) {
+    if (command === "unpinTab") {
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        const tabId = tabs[0].id;
+        chrome.tabs.update(tabId, { pinned: false });
+      });
+    }
+  });
+
+
+//   chrome.commands.onCommand.addListener(function(command) {
+//     console.log("hehe");
+//     if (command === "openExtension") {
+//       chrome.action.openPopup();
+//     }
+//   });
