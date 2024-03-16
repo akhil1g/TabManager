@@ -1,10 +1,8 @@
-/*global chrome*/
-// Function to close inactive tabs
-console.log("bg");
+
+// function that closes tabs on custom intervals
 function closeInactiveTabs() {
     chrome.storage.sync.get(['customInterval'], function(result) {
-        const interval = result.customInterval || 100000000; 
-        console.log(interval);
+        const interval = result.customInterval || 100000000; // Default interval: 1000000000
         chrome.tabs.query({}, function(tabs) {
             const currentTime = new Date().getTime();
             tabs.forEach(function(tab) {
@@ -16,4 +14,33 @@ function closeInactiveTabs() {
         });
     });
 }
-setInterval(closeInactiveTabs, 60000);
+setInterval(closeInactiveTabs, 600000); 
+
+// function to pin the active tab
+chrome.commands.onCommand.addListener(function(command) {
+    if (command === "pinTab") {
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        const tabId = tabs[0].id;
+        chrome.tabs.update(tabId, { pinned: true });
+      });
+    }
+  });
+
+
+  // function to unpin the active tab
+chrome.commands.onCommand.addListener(function(command) {
+    if (command === "unpinTab") {
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        const tabId = tabs[0].id;
+        chrome.tabs.update(tabId, { pinned: false });
+      });
+    }
+  });
+
+
+//   chrome.commands.onCommand.addListener(function(command) {
+//     console.log("hehe");
+//     if (command === "openExtension") {
+//       chrome.action.openPopup();
+//     }
+//   });

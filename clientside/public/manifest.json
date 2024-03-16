@@ -12,6 +12,25 @@
       "service_worker": "./background.js",
       "persistent": false
     },
+    "commands": {
+      "pinTab": {
+        "suggested_key": {
+          "default": "Ctrl+Y"
+        },
+        "description": "Pin the active tab"
+      },
+      "unpinTab": {
+        "suggested_key": {
+          "default": "Ctrl+Q"
+        },
+        "description": "UnPin the active tab"
+      },
+      "_execute_action": {
+        "suggested_key": {
+            "default": "Ctrl+Shift+E"
+        }
+    }
+    },
     "permissions": [
       "activeTab",
         "storage",
