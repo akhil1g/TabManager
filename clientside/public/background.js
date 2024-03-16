@@ -1,15 +1,19 @@
+/*global chrome*/
 // Function to close inactive tabs
-console.log("backgound");
-const closeInactiveTabs = () => {
-    chrome.tabs.query({}, (tabs) => {
-        const currentTime = new Date().getTime();
-        tabs.forEach((tab) => {
-            if (currentTime - tab.lastAccessed >= inactiveDuration * 100) {
-                chrome.tabs.remove(tab.id);
-            }
+console.log("bg");
+function closeInactiveTabs() {
+    chrome.storage.sync.get(['customInterval'], function(result) {
+        const interval = result.customInterval || 100000000; 
+        console.log(interval);
+        chrome.tabs.query({}, function(tabs) {
+            const currentTime = new Date().getTime();
+            tabs.forEach(function(tab) {
+                const tabLastActiveTime = new Date(tab.lastAccessed).getTime();
+                if (currentTime - tabLastActiveTime > interval * 60 * 1000) {
+                    chrome.tabs.remove(tab.id);
+                }
+            });
         });
     });
-};
-
-const intervalMinutes = 1; 
-setInterval(closeInactiveTabs, intervalMinutes * 60 * 1000);
+}
+setInterval(closeInactiveTabs, 60000);

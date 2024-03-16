@@ -11,6 +11,9 @@
 .tab-card.highlight{
     background-color: rgb(255, 123, 0);
 }
+.tab-card.duplicate{
+    background-color: palegoldenrod;
+}
 .tab-check{
     width: 15px;
     height: 15px;

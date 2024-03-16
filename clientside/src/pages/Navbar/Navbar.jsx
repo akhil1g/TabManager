@@ -21,6 +21,7 @@ export default function Navbar(){
             <Link to="/home" className="nav-ele">Home</Link>
             <Link to="/groups" className="nav-ele">Groups</Link>
             <Link to="/sessions" className="nav-ele">Sessions</Link>
+            <Link to="/settings" className="nav-ele">Settings</Link>
             <Check />
         </div>
     );

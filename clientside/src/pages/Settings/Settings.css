@@ -1,0 +1,10 @@
+.box6{
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
