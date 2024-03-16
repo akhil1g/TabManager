@@ -13,31 +13,23 @@ function Home() {
 
     const navigate = useNavigate();
     const [userName,setName] = useState("");
-    const [currTab,setCurrTab] = useState(null);
     const [allTabs,setAllTabs] = useState([]);
-    const [currWindow,setCurrWindow] = useState(null);
     const [allWindows,setAllWindows] = useState([]);
     const [windowsWithTabs, setWindowsWithTabs] = useState([]);
     const [windowCount, setWindowCount] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");
+    const [duplicateUrls, setDuplicateUrls] = useState([]);
     const highlightedTabRef = useRef(null);
 
 
-    async function GetCurrentTab() {
-        let queryOptions = { active: true, lastFocusedWindow: true };
-        let tab = await chrome.tabs.query(queryOptions);
-        console.log("CurrentTab");
-        setCurrTab(tab);
+    //To Get All Tabs
+    async function getAllTabs(){
+        const t = await chrome.tabs.query({});
+        console.log(t);
+        setAllTabs(t);
     }
 
-    async function getCurrentWindow(){
-        const current = await chrome.windows.getCurrent();
-        console.log("currentWindow");
-        console.log(current);
-        setCurrWindow(current);
-    }
 
-    
     //Get all Windows with respective Tabs    
     async function getAllWindows(){
         const currentwindows = await chrome.windows.getAll();
@@ -59,11 +51,6 @@ function Home() {
         console.log("hehe");
     }
 
-    async function getAllTabs(){
-        const t = await chrome.tabs.query({});
-        console.log(t);
-        setAllTabs(t);
-    }
 
     async function getTabsOfWindow(id){
         let queryOptions = {windowId:id}
@@ -123,6 +110,10 @@ function Home() {
     }
 
 
+    
+
+   
+
     async function getName() {
         const req = await fetch("http://localhost:2000/api/home",{
         headers: {
@@ -134,6 +125,18 @@ function Home() {
         console.log(data.name);
     }
 
+
+
+    useEffect(() => {
+        async function getAllTabsAndHighlightDuplicates() {
+            const tabURLs = allTabs.map(tab => tab.url);
+            const duplicateURLs = tabURLs.filter((url, index) => tabURLs.indexOf(url) !== index);
+            setDuplicateUrls(duplicateURLs);
+        }
+        getAllTabsAndHighlightDuplicates();
+    }, []);
+
+
     useEffect(function(){
         const token = localStorage.getItem('token');
         console.log(token);
@@ -144,9 +147,7 @@ function Home() {
                 navigate.replace('/login');
             }else{
 
-                GetCurrentTab();
                 getAllTabs();
-                getCurrentWindow();
                 getAllWindows();
                 getTabsOfWindow();
                 getName();
@@ -155,9 +156,6 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    // useEffect(()=>{
-    //   console.log(tabs);
-    // },[tabs]);
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
@@ -181,6 +179,9 @@ function Home() {
             highlightedTabRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [highlightedTabRef]);
+
+
+    
 
     return (
     <div>
@@ -220,6 +221,8 @@ function Home() {
                             highlight={highlight}
                             //Pass ref to the highlighted tab card
                             ref={ref}
+                            // Highlight the tab if it's a duplicate
+                            isDuplicate={x.isDuplicate}
                         />)
                     })} 
                     </div>
