@@ -13,6 +13,7 @@
         const { highlight } = props;
         const { isDuplicate } = props;
         const cardRef = useRef(null);
+        const [isBookmarked, setIsBookmarked] =useState(false);
 
         console.log(props,"props");
         const handleChange = e => {

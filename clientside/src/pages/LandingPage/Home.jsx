@@ -21,6 +21,7 @@
         const [duplicateUrls, setDuplicateUrls] = useState([]);
         const [duplicateTabIds, setDuplicateTabIds] = useState([]);
         const [ifDuplicate, setIfDuplicate]=useState(false);
+        const [boomarks,setBookmarks]=useState([]);
         const highlightedTabRef = useRef(null);
 
 
@@ -208,6 +209,29 @@
             setIfDuplicate(!ifDuplicate);
             findDuplicateTabs(); 
         }
+        
+        //create a bookmark
+        const bookmarkTab = (tabTitle, tabUrl) => {
+            console.log('Tab Title:', tabTitle);
+            console.log('Tab URL:', tabUrl);
+
+            // Create a bookmark for the specified tab
+            chrome.bookmarks.create({
+                title: tabTitle,
+                url: tabUrl
+            }, (newBookmark) => {
+                console.log('Bookmark created:', newBookmark);
+                const bookmarkId = newBookmark.id;
+                setBookmarks(prevBookmarks => [...prevBookmarks, bookmarkId]);
+            });
+        };
+        
+        // //remove bookmark
+        // const removeBookmark = (bookmarkId) => {
+        //     chrome.bookmarks.remove(bookmarkId, () => {
+        //         console.log('Bookmark removed');
+        //     });
+        // };
 
         return (
         <div>
@@ -249,6 +273,8 @@
                                 ref={ref}
                                 //duplicate
                                 isDuplicate={ifDuplicate && duplicateTabIds.includes(x.id)}
+                                //bookmark
+                                handleBookmark={()=>bookmarkTab(x.title,x.url)}
                             />)
                         })} 
                         </div>

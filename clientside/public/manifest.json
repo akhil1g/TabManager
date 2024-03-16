@@ -37,6 +37,7 @@
         "tabs",
         "tabGroups",
         "sessions",
+        "bookmarks",
         "http://localhost:2000/"
     ],
     "content_scripts": [
