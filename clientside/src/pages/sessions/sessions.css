@@ -15,12 +15,27 @@
 .ses-options{
     display: flex;
     justify-content: space-around;
+    margin-top: 12px;
 }
 .ses-options span{
-    font-size: 14px;
+    font-size: 16px;
+    margin-right: 5px;
 }
 .ses-options button{
+    width: 60px;
     margin-left: 5px;
-    font-size: 14px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    border: none;
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+        background-color: var(--white);
+        border: 1px solid black;
+        color: black;
+    }
+}
+.home4-box:nth-child(2){
+    font-size: 12px;
 }
 

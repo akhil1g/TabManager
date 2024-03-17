@@ -1,5 +1,8 @@
 :root {
-    --white: #FEFBF6;
+    --white: #fbf9f7;
+    --blue: #1089FF;
+    --darkblue: #23374D;
+    --grey: #E5E5E5;
 }
 html,body{
     margin: 0;
@@ -7,6 +10,7 @@ html,body{
     box-sizing: border-box;
     width: 400px;
     height: 500px;
+    background-color: var(--white);
 }
 html::-webkit-scrollbar {
     display: none;

@@ -1,3 +1,4 @@
+/*global chrome*/
 import React from "react";
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router";
@@ -5,15 +6,13 @@ import jwt from 'jwt-decode'
 import './Restore.css'
 
 
-const Restore=function(){
-
-    /*global chrome*/
+const Restore = ({saved, setTotalSessions}) => {
+    
     const navigate = useNavigate();
-    const [sessions,setSessions]=useState([]);
+    const [sessions, setSessions] = useState([]);
 
-
-    async function restoreSessions(email) {
-        try {
+    async function restoreSessions(email){
+        try{
             const response = await fetch('http://localhost:2000/api/restoresessions', {
                 method: 'POST',
                 headers: {
@@ -23,49 +22,45 @@ const Restore=function(){
             });
             const data = await response.json();
             console.log(data);
-           const allSessions = Object.values(data).flat();
-           console.log(allSessions);
-            setSessions(allSessions);
-        } catch (err) {
+            const allSessions = Object.values(data).flat();
+            console.log(allSessions);
+            setSessions(allSessions); 
+            setTotalSessions(allSessions.length);
+        }catch(err){
             console.error('Error restoring sessions:', err);
         }
     }
-    
-
     
     useEffect(function(){
         const token = localStorage.getItem('token');
         console.log(token);
         if(token){
-            const user=jwt(token);
+            const user = jwt(token);
             console.log(user);
-            const email=user.email;
-            if(!user)
-            {
+            const email = user.email;
+            if(!user){
                 navigate.replace('/login');
             }
-            else
-            {
+            else{
                 restoreSessions(email);
             }
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[navigate])
+    },[navigate,saved])
 
-    function handleRestore(wind, tabs) {
+    function handleRestore(wind, tabs){
         console.log("restore");
         console.log(wind);
         console.log(tabs);
-        wind.forEach(windowId => {
-            chrome.windows.create({ focused: false }, (createdWindow) => {
-                tabs.forEach(tab => {
-                    if (tab.id === windowId) {
+        wind.forEach((windowId) => {
+            chrome.windows.create({focused: false}, (createdWindow) => {
+                tabs.forEach((tab) => {
+                    if(tab.id === windowId) {
                         chrome.tabs.create({
                             url: tab.url,
                             active: false,
                             pinned: tab.pinned,
                             windowId: createdWindow.id
-                        }, (createdTab) => {
+                        },(createdTab) => {
                             chrome.tabs.move(createdTab.id, { index: -1 });
                         });
                     }
@@ -74,25 +69,25 @@ const Restore=function(){
         });
     }
     
+    const arr = sessions.slice().reverse();
 
     return (
         <div className="box4">
-            {sessions.map((session) => {
+            {arr.map((session) => {
                 return(
                     <div className="ses-box">
                         <div className="ses-dets">
-                            <span>Session: {session.date}</span>
-                            <button className="restore-btn" 
-                                    onClick={() => handleRestore(session.windowIds, session.tabs)}>Restore</button>
+                            <span>{session.date}</span>
+                            <button onClick={() => handleRestore(session.windowIds, session.tabs)}>Restore</button>
                         </div>
                         {session.windowIds.map((y,index) => {
                             return (
                             <div className="win-div">
                                 <span>Window: {index+1}</span>
                                 <div className="line3"></div>
-                                {session.tabs.filter(tab => tab.id === y).map((tab) => {
+                                {session.tabs.filter(tab => tab.id === y).map((tab, idx) => {
                                     return (
-                                        <div className="ses-tab-title"># {tab.title}</div>
+                                        <div className="ses-tab-title">{idx+1}.  {tab.title}</div>
                                     )
                                 })}
                             </div>)

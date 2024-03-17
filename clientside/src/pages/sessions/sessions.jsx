@@ -1,51 +1,51 @@
-import React, {  useState, useEffect } from "react";
-import './sessions.css'
+/*global chrome*/
+import React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import Navbar from "../../layouts/Navbar/Navbar";
 import jwt from 'jwt-decode'
+import Navbar from "../../layouts/Navbar/Navbar";
 import Restore from './Restore/Restore'
+import './sessions.css'
 
 
-const Sessions = function()
-{
-    /*global chrome*/
+const Sessions = function(){
+    
     const navigate = useNavigate();
-    const [email,setMail]=useState('');
-    const [saved,setSaved]=useState(false);
-    const [date,setDate]=useState('');
-    const [allTabs,setAllTabs] = useState([]);
-    const [allWindows,setAllWindows] = useState([]);
+    const [email, setMail] = useState('');
+    const [saved, setSaved] = useState(false);
+    const [date, setDate] = useState('');
+    const [allTabs, setAllTabs] = useState([]);
+    const [allWindows, setAllWindows] = useState([]);
+    const [totalSessions, setTotalSessions] = useState(0);
 
     async function getAllWindows(){
         const currentwindows = await chrome.windows.getAll();
         console.log(currentwindows);
-        const windows= currentwindows.map(window=>window.id);
+        const windows = currentwindows.map((window) => (window.id));
         console.log(windows);
         setAllWindows(windows);
     }
 
     async function getAllTabs(){
         const t = await chrome.tabs.query({});
-        const tabInfo = t.map(tab =>({ title : tab.title,id: tab.windowId , url: tab.url, pinned : tab.pinned}));
+        const tabInfo = t.map((tab) =>({title: tab.title,
+                                        id: tab.windowId , 
+                                        url: tab.url, 
+                                        pinned: tab.pinned}));
         console.log(tabInfo);
         setAllTabs(tabInfo);
     }
 
-
-    
-
-    async function SaveSession()
-    {
-        const response=await fetch('http://localhost:2000/api/savesession',{
+    async function SaveSession(){
+        const response = await fetch('http://localhost:2000/api/savesession',{
             method:"POST",
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({ email,allWindows,allTabs,date}),
+            body:JSON.stringify({email, allWindows, allTabs, date}),
         });
-        const data=await response.json();
-        if(data.status=="ok")
-        {
+        const data = await response.json();
+        if(data.status==="ok"){
             setSaved(true);
             console.log("mst");
         }
@@ -55,18 +55,17 @@ const Sessions = function()
     }
 
     useEffect(function(){
-        async function getUser() {
-          const result = await fetch("http://localhost:2000/auth/user", {
-            method: "GET",
-            credentials: "include",
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-allow-Credentials": true,
-            },
-          });
-          const data = await result.json();
-          console.log(data);
-          if (data.code == 200) {
+        const token = localStorage.getItem('token');
+        console.log(token);
+        if(token){
+            const user=jwt(token);
+            console.log(user);
+            if(!user)
+            {
+                navigate.replace('/login');
+            }
+            else
+            {
                 let dt = new Date().toLocaleDateString();
                 console.log(dt);
                 setDate(dt);
@@ -79,13 +78,12 @@ const Sessions = function()
             navigate.replace("/login");
           }
         }
-        getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
-    const handleSave=function()
-    {
+    const handleSave=function(){
         SaveSession();
+        setSaved(true);
     }
 
     return (
@@ -94,9 +92,10 @@ const Sessions = function()
             <div className="home4-box">
                 <div className="ses-options">
                     <span>Want to save current sessions ?</span>
-                    <button className="save-session-btn" onClick={handleSave}>Save</button>
+                    <button onClick={handleSave}>Save</button>
                 </div>
-                <Restore/>
+                <div>Total Sessions: {totalSessions}</div>
+                <Restore saved={saved} setTotalSessions={setTotalSessions}/>
             </div>
         </div>
     );
