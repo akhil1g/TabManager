@@ -55,31 +55,32 @@ const Sessions = function(){
     }
 
     useEffect(function(){
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if(token){
-            const user=jwt(token);
-            console.log(user);
-            if(!user)
-            {
-                navigate.replace('/login');
-            }
-            else
-            {
-                let dt = new Date().toLocaleDateString();
+        
+        async function getUser() {
+           const result = await fetch("http://localhost:2000/auth/user", {
+             method: "GET",
+             credentials: "include",
+             headers: {
+               "Content-Type": "application/json",
+               "Access-Control-allow-Credentials": true,
+             },
+           });
+           const data = await result.json();
+           console.log(data);
+           if (data.code == 200) {
+               let dt = new Date().toLocaleDateString();
                 console.log(dt);
                 setDate(dt);
                 setMail(data.user.email);
                 getAllTabs();
                 getAllWindows();
-          }
-          else
-          {
-            navigate.replace("/login");
-          }
-        }
+           } else {
+             navigate.replace("/login");
+           }
+         }
+         getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[]);
     
     const handleSave=function(){
         SaveSession();

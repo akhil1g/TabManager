@@ -32,19 +32,24 @@ const Restore = ({saved, setTotalSessions}) => {
     }
     
     useEffect(function(){
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if(token){
-            const user = jwt(token);
-            console.log(user);
-            const email = user.email;
-            if(!user){
-                navigate.replace('/login');
-            }
-            else{
-                restoreSessions(email);
-            }
-        }
+         async function getUser() {
+           const result = await fetch("http://localhost:2000/auth/user", {
+             method: "GET",
+             credentials: "include",
+             headers: {
+               "Content-Type": "application/json",
+               "Access-Control-allow-Credentials": true,
+             },
+           });
+           const data = await result.json();
+           console.log(data);
+           if (data.code == 200) {
+             restoreSessions(data.user.email);
+           } else {
+             navigate.replace("/login");
+           }
+         }
+         getUser();
     },[navigate,saved])
 
     function handleRestore(wind, tabs){
