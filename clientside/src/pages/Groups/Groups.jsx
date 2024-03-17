@@ -6,9 +6,7 @@ import './Groups.css';
 
 function Groups() {
 
-
     const [showYourGroups, setShowYourGroups] = useState(true);
-    
     
     function handleShowYourGroups(){
         setShowYourGroups(true);
@@ -17,15 +15,16 @@ function Groups() {
         setShowYourGroups(false);
     }
 
-
     return (
         <div>
             <Navbar />
             <div className="home-grp-box">
                 <div className="box-options">
-                    <span onClick={handleShowYourGroups}>Your Groups</span>
+                    <span onClick={handleShowYourGroups}
+                          className={`yourgrps ${showYourGroups===true ? 'on' : ''}`}>Your Groups</span>
                     <span>|</span>
-                    <span onClick={handleShowCreateGroups}>Create Groups</span>
+                    <span onClick={handleShowCreateGroups}
+                          className={`crtgrps ${showYourGroups===true ? '' : 'on'}`}>Create Groups</span>
                 </div>
                 <div className="line"></div>
                 {showYourGroups ? <YourGroups/> : <CreateGroups/>}

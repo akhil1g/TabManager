@@ -33,50 +33,61 @@ function Settings(){
                 <div className="box6-1">
                     <div className="box-title">Close Inactive Tabs</div>
                     <div className="line6"></div>
-                    <span>After Every: </span>
-                    <input
-                        type="number"
-                        id="intervalInput"
-                        min="1"
-                        step="1"
-                        value={customInterval}
-                        onChange={handleIntervalChange}
-                    />
-                    <span>Minutes</span>
-                    <button onClick={handleSave}>Save</button>
+                    <div className="interval">
+                        <span className="int1">After Every: </span>
+                        <input
+                            type="number"
+                            id="intervalInput"
+                            min="1"
+                            step="1"
+                            value={customInterval}
+                            onChange={handleIntervalChange}
+                            className="int2"
+                        />
+                        <span className="int3">Minutes</span>
+                    </div>
+                    <button className="interval-btn" onClick={handleSave}>Save</button>
                 </div>
                 <div className="box6-1">
                     <div className="box-title">Keyboard ShortCuts</div>
                     <div className="line6"></div>
-                    <div>
-                        <div>Pin Tabs</div>
-                        <div>Ctrl + Y</div>
+                    <div className="sub">
+                        <div className="sub1">Pin Tabs:</div>
+                        <div className="sub2">Ctrl + Y</div>
                     </div>
-                    <div>
-                        <div>Unpin Tabs</div>
-                        <div>Ctrl + Q</div>
+                    <div className="sub">
+                        <div className="sub1">Unpin Tabs:</div>
+                        <div className="sub2">Ctrl + Q</div>
                     </div>
-                    <div>
-                        <div>Open Extension</div>
-                        <div>Alt + Shift + P</div>
+                    <div className="sub">
+                        <div className="sub1">Open Extension:</div>
+                        <div className="sub2">Alt + Shift + P</div>
                     </div>
                 </div>
                 <div className="box6-1">
                     <div className="box-title">Available Features</div>
                     <div className="line6"></div>
-                    <div>
-                        <span>blah blah blah</span>
-                        <span>blah blah blah</span>
-                        <span>blah blah blah</span>
-                        <span>blah blah blah</span>
-                        <span>blah blah blah</span>
-                    </div>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
+                    <span className="dets">blah blah blah</span>
                 </div>
                 <div className="box6-1">
                     <div className="box-title">About Us</div>
                     <div className="line6"></div>
                     <div>
-                        <span>Project made for Innodev '24 </span>
+                        <span>Project made for Innodev '24 under Electromania @ MNNIT, Allahabad</span>
+                        <span>Contributers:</span>
+                        <a href="/">Akhil Gupta</a>
+                        <a href="/">Aarya Khandare</a>
+                        <a href="/">Isha Vishwakarma</a>
+                        <a href="/">Aditya Singh Yadav</a>
                     </div>
                 </div>
             </div>

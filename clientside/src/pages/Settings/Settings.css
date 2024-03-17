@@ -3,25 +3,82 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px;
-    background-color: bisque;
+    background-color: var(--white);
 }
 .box6-1{
     width: 95%;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--bg);
 }
 .box-title{
     width: 100%;
-    background-color: palevioletred;
+    font-size: 14px;
+    font-weight: 600px;
+    text-align: left;
 }
 .line6{
-    width: 98%;
+    width: 100%;
     height: 0px;
     border: 1px solid black;
+    margin-top: 1.5px;
+}
+.interval{
+    width: 100%;
+    display: flex;
+    padding: 5px;
+    margin-top: 3px;
+}
+.int1{
+    font-size: 12px;
+    margin: 0 5px;
+}
+.int2{
+    width: 80px;
+    height: 12px;
+}
+.int3{
+    font-size: 12px;
+    margin-left: 3px;
+}
+.interval-btn{
+    width: 80px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    border: none;
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+        background-color: var(--white);
+        border: 1px solid black;
+        color: black;
+    }
+}
+.sub{
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+.sub1{
+    width: 135px;
+    text-align: right;
+}
+.sub2{
+    width: 135px;
+    text-align: left;
+    color: var(--blue);
+    font-weight: 600;
+}
+.dets{
+    width: 95%;
+    text-align: left;
+    margin-top: 5px;
 }

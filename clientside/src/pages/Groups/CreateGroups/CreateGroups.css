@@ -76,6 +76,6 @@
     padding: 5px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     align-items: center;
 }
