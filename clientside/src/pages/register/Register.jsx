@@ -9,22 +9,20 @@ const Register=function()
     const [password,setPassword]=useState("");
     const navigate = useNavigate();
 
-    async function registerUser(event)
-    {
-        event.preventDefault();
-        const response=await fetch('http://localhost:2000/api/register',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({name,email,password}),
-        });
-        const data=await response.json();
-        if(data.status==='ok')
-        {
-            navigate("/login");
-        }
-    }
+   async function registerUser(event) {
+     event.preventDefault();
+     const response = await fetch("http://localhost:2000/auth/register", {
+       method: "POST",
+       mode: "cors",
+       body: JSON.stringify({ name, email, password }),
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
+     const data = await response.json();
+     if (data.status === "ok") window.location.href = "./login";
+   }
+
     return (
         <div className="reg-box">
             <form className="reg-form" onSubmit={registerUser}>
@@ -59,11 +57,6 @@ const Register=function()
             <button className="reg-button" type="submit" value="Register">Continue..</button>
             <div className="reg-or">OR</div>
             <hr></hr>
-            <div className="button-container">
-            <button className="google-sign-up-button">
-                Sign up with Google
-            </button>
-            </div>
             </form>
         </div>
     )

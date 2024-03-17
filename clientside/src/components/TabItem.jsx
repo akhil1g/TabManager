@@ -1,11 +1,11 @@
-/* eslint-disable no-unused-vars */
-/*global chrome*/
 import React, { useState, useEffect, useRef} from "react";
 import { TiPin } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdOutlineStarOutline } from "react-icons/md";
 import { MdOutlineStarPurple500 } from "react-icons/md";
-import './Tabitem.css'
+import '../components/TabItem.css';
+
+/*global chrome*/
 
 function Card(props) {
     

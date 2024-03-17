@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/*global chrome*/
 import React,{useEffect, useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom'
 import jwt from 'jwt-decode'
@@ -8,6 +6,7 @@ import Card from '../../components/TabItem'
 import { CiSearch } from "react-icons/ci";
 import './home.css'
 
+/*global chrome*/
 
 function Home() {
 
@@ -116,39 +115,29 @@ function Home() {
     
 
 
-
-    async function getName() {
-        const req = await fetch("http://localhost:2000/api/home",{
-        headers: {
-        'x-access-token': localStorage.getItem('token'),
-        },
-        })
-        const data = await req.json();
-        setName(data.name)
-        console.log(data.name);
-    }
-
-
-
-    
-
-
     useEffect(function(){
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if(token){
-            const user=jwt(token);
-            console.log(user);
-            if(!user){
+       async function getUser() {
+      const result = await fetch("http://localhost:2000/auth/user", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-allow-Credentials": true,
+        },
+      });
+      const data = await result.json();
+      console.log(data);
+            if(data.code != 200){
                 navigate.replace('/login');
             }else{
 
                 getAllTabs();
                 getAllWindows();
                 getTabsOfWindow();
-                getName();
+                setName(data.user.name);
             }
         }
+        getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
