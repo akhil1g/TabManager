@@ -20,12 +20,18 @@ function ExportPages(){
 
 
     async function handleCreateLink() {
-        
-        const encodedData=btoa(JSON.stringify(groupTabs));
-        const baseUrl = 'http://'; // Change this to your actual export URL
-        const exportUrl = `${baseUrl}?data=${encodedData}`;
-        console.log(exportUrl);
-        setExportUrl(exportUrl);
+        if(groupTabs.length==0)
+        {
+            setExportUrl('');
+        }
+        else
+        {
+            const encodedData=btoa(JSON.stringify(groupTabs));
+            const baseUrl = 'http://'; // Change this to your actual export URL
+            const exportUrl = `${baseUrl}?data=${encodedData}`;
+            console.log(exportUrl);
+            setExportUrl(exportUrl);
+        }
     }
 
     const copyToClipboard = () => {
@@ -34,12 +40,24 @@ function ExportPages(){
         });
     };
 
+    const handleCheckboxChange = (isChecked, tabURL) => {
+        if(isChecked) {
+            setGroupTabs(prevGroupTabs => [...prevGroupTabs, tabURL]);
+        } else {
+            setGroupTabs(prevGroupTabs => prevGroupTabs.filter(url => url !== tabURL));
+        }
+    };
 
     async function handleonClick(tabURL) {
         console.log(tabURL);
         setGroupTabs([...groupTabs, tabURL]);
     }
+    
+    async function remove(tabURL)
+    {
+        console.log(tabURL);
 
+    }
 
     useEffect(function () {
         const token = localStorage.getItem('token');
@@ -69,7 +87,7 @@ function ExportPages(){
                             title={x.title}
                             url={x.url}
                             icon={x.favIconUrl}
-                            fun={() => handleonClick(x.url)}
+                            handleChange={(isChecked) => handleCheckboxChange(isChecked, x.url)}
                         />
                     )
                 })}
@@ -81,6 +99,7 @@ function ExportPages(){
                     <button onClick={copyToClipboard}>Copy Link</button>
                 </div>
             )}
+            
         </div>
     );
 }

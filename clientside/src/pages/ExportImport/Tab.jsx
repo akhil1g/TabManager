@@ -3,12 +3,10 @@ import './Tab.css';
 
 function Card(props) {
 
-    const handleCheck = e => {
-        const checked = e.target.checked;
-        if (checked) {
-            props.fun(props.url); // Pass the url of the tab to props.fun
-        }
-    };
+        const handleCheck = e => {
+            const checked = e.target.checked;
+            props.handleChange(checked, props.url);
+        };
 
     return (
         <div className="tab2-card">

@@ -47,9 +47,25 @@ function YourGroups() {
         setAllGroups(prevGroups => prevGroups.filter(group => group.id !== groupid));
     }
 
+    const handleUngroup = async (groupid) => {
+        try 
+        {
+            console.log(groupid);
+            const tabs= await chrome.tabs.query({groupId: groupid})
+            tabs.map((tab)=>{
+                chrome.tabs.ungroup(tab.id);
+            })
+            setAllGroups(prevGroups => prevGroups.filter(group => group.id !== groupid));
+        } 
+        catch (error) 
+        {
+            console.error('Error ungrouping group:', error);
+        }
+    };
+
     let len = allgroups.length;
     return (
-        <div className="tab3-list">
+        <div className="tab3-list"> 
             <span>Total Groups: {len}</span>
             {len===0 ? (<div className="no-grp">No groups found :( </div>) 
             : (allgroups.map((x)=>{
@@ -63,6 +79,7 @@ function YourGroups() {
                             x.collapsed===true ? handleCollapse(x.id,false)
                             : handleCollapse(x.id,true)}
                         onCloseGroup={() => handleGroupClose(x.id)}
+                        onUngroup={()=>handleUngroup(x.id)}
                     />
                 );
             }))}
