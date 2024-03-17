@@ -1,7 +1,7 @@
 import React, {  useState, useEffect } from "react";
 import './sessions.css'
 import { useNavigate } from "react-router";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../layouts/Navbar/Navbar";
 import jwt from 'jwt-decode'
 import Restore from './Restore/Restore'
 

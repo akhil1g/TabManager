@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../Navbar/Navbar";
-import YourGroups from '../YourGroups/YourGroups'
-import CreateGroups from '../CreateGroups/CreateGroups'
+import Navbar from "../../layouts/Navbar/Navbar"
+import YourGroups from "./YourGroups/YourGroups"
+import CreateGroups from './CreateGroups/CreateGroups'
 import './Groups.css';
 
 function Groups() {

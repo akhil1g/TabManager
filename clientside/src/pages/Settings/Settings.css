@@ -3,8 +3,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px;
+    background-color: bisque;
+}
+.box6-1{
+    width: 95%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+}
+.box-title{
+    width: 100%;
+    background-color: palevioletred;
+}
+.line6{
+    width: 98%;
+    height: 0px;
+    border: 1px solid black;
 }

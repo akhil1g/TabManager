@@ -3,10 +3,8 @@ import {auth, provider} from "./config";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router";
 import './login.css'
-import Navbar from "../Navbar/Navbar";
-import './login.css'
 
-const Login=function()
+const Login = function()
 {
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
