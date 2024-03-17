@@ -210,6 +210,60 @@
             findDuplicateTabs(); 
         }
         
+        // const handleBookmark = (tab) => {
+        //     // Check if the current tab URL is already bookmarked
+        //     chrome.bookmarks.search({ url: tab.url }, (results) => {
+        //         if (results.length === 0) {
+        //             createBookmark(tab);
+        //         } else {
+        //             const bookmarkIdToRemove = results[0].id;
+        //             removeBookmark(bookmarkIdToRemove);
+                
+        //       }
+        //     });
+        // };
+        // const createBookmark = (tab) => {
+        //     // If the tab URL is not bookmarked, create a new bookmark
+        //     chrome.bookmarks.create({
+        //         title: tab.title,
+        //         url: tab.url,
+        //         parentId: "1" // Create the bookmark in the "Other Bookmarks" folder (with ID = 1)
+        //     }, (bookmark) => {
+        //         // Add the new bookmark to the state
+        //         const bookmarkedTabs = [...bookmarks, bookmark];
+        //         setBookmarks(bookmarkedTabs);
+        
+        //         // Store the updated bookmarks array in chrome.storage
+        //         chrome.storage.local.set({ bookmarks: bookmarkedTabs }, () => {
+        //             console.log("Bookmarks updated in storage.");
+        //         });
+        //     });
+        // }
+        // const removeBookmark = (bookmarkIdToRemove) => {
+        //     // If the tab URL is already bookmarked, remove the bookmark
+            
+        //     chrome.bookmarks.remove(bookmarkIdToRemove, (removed) => {
+        //         if (removed) {
+        //             // Remove the bookmark from the state
+        //             const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.id !== bookmarkIdToRemove);
+        //             setBookmarks(updatedBookmarks);
+        
+        //             // Store the updated bookmarks array in chrome.storage
+        //             chrome.storage.local.set({ bookmarks: updatedBookmarks }, () => {
+        //                 console.log("Bookmarks updated in storage.");
+        //             });
+        //         }
+        //     });
+        // }
+        // // Function to retrieve bookmarked tab URLs from chrome.storage
+        // useEffect(() => {
+        //     chrome.storage.sync.get(['bookmarks'], function (result) {
+                
+        //         const storedBookmarks = result.bookmarks || [];
+        //         setBookmarks(storedBookmarks);
+        //         console.log("Bookmarks retrieved from chrome storage");
+        //     });
+        // }, []);
         const handleBookmark = (tabTitle, tabUrl) => {
             // Check if the tab is already bookmarked
             const isBookmarked = bookmarks.some(bookmark => bookmark.url === tabUrl);
@@ -222,7 +276,7 @@
                 bookmarkTab(tabTitle, tabUrl);
             }
         };
-        //create a bookmark
+        // Function to add a bookmark for the tab
         const bookmarkTab = (tabTitle, tabUrl) => {
             console.log('Tab Title:', tabTitle);
             console.log('Tab URL:', tabUrl);
@@ -232,29 +286,38 @@
                 url: tabUrl
             }, (newBookmark) => {
                 console.log('Bookmark created:', newBookmark);
-                // // Update isBookmarked state
-                // setIsBookmarked(true);
-                // Add the newly created bookmark to the bookmarks state
-                setBookmarks(prevBookmarks => [...prevBookmarks, newBookmark]);
+                // Update the Chrome storage with the new bookmark
+                updateChromeStorage([...bookmarks, newBookmark]);
             });
         };
-       // Function to remove the bookmark for the tab
+
+        // Function to remove the bookmark for the tab
         const removeBookmark = (tabUrl) => {
             // Find the bookmark corresponding to the tab URL
             const bookmarkToRemove = bookmarks.find(bookmark => bookmark.url === tabUrl);
             if (bookmarkToRemove) {
                 const bookmarkId = bookmarkToRemove.id;
-                // Remove the bookmark by ID
+                // Remove the bookmark from the Chrome storage
                 chrome.bookmarks.remove(bookmarkId, () => {
                     console.log('Bookmark removed');
-                    // Update the bookmarks state by filtering out the removed bookmark
-                    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.id !== bookmarkId);
-                    setBookmarks(updatedBookmarks);
+                    // Update the Chrome storage without the removed bookmark
+                    updateChromeStorage(bookmarks.filter(bookmark => bookmark.id !== bookmarkId));
                 });
             } else {
                 console.log('Bookmark not found for the tab URL:', tabUrl);
             }
         };
+
+        // Function to update the Chrome storage with the bookmarks
+        const updateChromeStorage = (bookmarks) => {
+            chrome.storage.sync.set({ bookmarks }, () => {
+                console.log('Chrome storage updated with bookmarks:', bookmarks);
+            });
+        };
+
+
+
+        
 
         return (
         <div>

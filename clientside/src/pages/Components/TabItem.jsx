@@ -1,4 +1,5 @@
     /* eslint-disable no-unused-vars */
+    /*global chrome*/
     import React, { useState, useEffect,useRef} from "react";
     import { TiPin } from "react-icons/ti";
     import { IoCloseSharp } from "react-icons/io5";
@@ -38,16 +39,57 @@
             }
         }, [props.highlight]);
 
-        // Function to handle bookmark
-        const handleBookmark = () => {
-            props.handleBookmark();
-            setIsBookmarked(!isBookmarked); // Toggle bookmark state
-        };
+        // // Function to handle bookmark
+        // const handleBookmark = () => {
+        //     props.handleBookmark();
+        //     setIsBookmarked(!isBookmarked); // Toggle bookmark state
 
-        // Update bookmark state when props change
-        useEffect(() => {
-            setIsBookmarked(props.isBookmarked);
-        }, [props.isBookmarked]);
+        //     // Save or remove bookmarked tab URL from chrome.storage
+        //     chrome.storage.sync.get(['bookmarks'], function(result) {
+        //         let bookmarks = result.bookmarks || [];
+        //         if (!isBookmarked) {
+        //             bookmarks.push(props.url);
+        //         } else {
+        //             bookmarks = bookmarks.filter(url => url !== props.url);
+        //         }
+        //         chrome.storage.sync.set({bookmarks: bookmarks});
+        //         console.log("saving bookmark to chrome storage")
+        //     });
+        // };
+
+        // // Initialize isBookmarked state from chrome.storage on component mount
+        // useEffect(() => {
+        //     chrome.storage.sync.get(['bookmarks'], function(result) {
+        //         const bookmarks = result.bookmarks || [];
+        //         setIsBookmarked(bookmarks.includes(props.url));
+        //         console.log("initialized bookmakr state on mounting")
+        //     });
+        // }, []);
+
+
+        const handleBookmark = () => {
+            // Toggle bookmark state
+            setIsBookmarked(prev => !prev);
+        
+            // Retrieve current bookmarks from Chrome storage
+            chrome.storage.sync.get(['bookmarks'], function(result) {
+                let bookmarks = result.bookmarks || [];
+                const tabUrl = props.url;
+        
+                if (!isBookmarked) {
+                    // If the tab is not bookmarked, add it to bookmarks
+                    bookmarks.push(tabUrl);
+                } else {
+                    // If the tab is already bookmarked, remove it from bookmarks
+                    bookmarks = bookmarks.filter(url => url !== tabUrl);
+                }
+        
+                // Update bookmarks in Chrome storage
+                chrome.storage.sync.set({ bookmarks }, function() {
+                    console.log("Bookmarks updated in Chrome storage:", bookmarks);
+                });
+            });
+        };
 
 
         return (
