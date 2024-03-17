@@ -1,6 +1,7 @@
 import React from "react";
 import Check from "./check";
 import {Link} from 'react-router-dom';
+import { IoSettingsOutline } from "react-icons/io5";
 import './navbar.css';
 
 export default function Navbar(){
@@ -21,8 +22,8 @@ export default function Navbar(){
             <Link to="/home" className="nav-ele">Home</Link>
             <Link to="/groups" className="nav-ele">Groups</Link>
             <Link to="/sessions" className="nav-ele">Sessions</Link>
-            <Link to="/settings" className="nav-ele">Settings</Link>
             <Link to="/exports" className="nav-ele">Exp/Imp</Link>
+            <Link to="/settings" className="nav-ele"><IoSettingsOutline size={20}/></Link>
             <Check />
         </div>
     );

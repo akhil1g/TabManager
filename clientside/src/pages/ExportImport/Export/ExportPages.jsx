@@ -1,8 +1,9 @@
 /*global chrome*/
-import React, { useEffect, useState } from "react";
-import jwt from 'jwt-decode';
+import React from 'react'
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Card from "../Tab";
+import jwt from 'jwt-decode';
+import Card from "./Tab";
 import './ExportPages.css'
 
 function ExportPages(){
@@ -20,13 +21,11 @@ function ExportPages(){
 
 
     async function handleCreateLink() {
-        if(groupTabs.length==0)
-        {
+        if(groupTabs.length===0){
             setExportUrl('');
         }
-        else
-        {
-            const encodedData=btoa(JSON.stringify(groupTabs));
+        else{
+            const encodedData = btoa(JSON.stringify(groupTabs));
             const baseUrl = 'http://'; // Change this to your actual export URL
             const exportUrl = `${baseUrl}?data=${encodedData}`;
             console.log(exportUrl);
@@ -48,21 +47,10 @@ function ExportPages(){
         }
     };
 
-    async function handleonClick(tabURL) {
-        console.log(tabURL);
-        setGroupTabs([...groupTabs, tabURL]);
-    }
-    
-    async function remove(tabURL)
-    {
-        console.log(tabURL);
-
-    }
-
     useEffect(function () {
         const token = localStorage.getItem('token');
         console.log(token);
-        if (token) {
+        if(token){
             const user = jwt(token);
             console.log(user);
             if(!user){
@@ -75,11 +63,12 @@ function ExportPages(){
 
 
     return(
-        <div className="home2-box">
-            <div className="box1">
+        <div className="home7-box">
+            <div className="box7">
                 <span>Total Tabs: {allTabs.length}</span>
+                <button onClick={handleCreateLink}>Export Link</button>
             </div>
-            <div className="tab2-list">
+            <div className="tab7-list">
                 {allTabs.map((x) => {
                     return (
                         <Card
@@ -92,9 +81,8 @@ function ExportPages(){
                     )
                 })}
             </div>
-            <button className="grp-btn" onClick={handleCreateLink}>Create Export Link</button>
             {exportUrl && (
-                <div>
+                <div className='link-popup'>
                     <input type="text" value={exportUrl} readOnly />
                     <button onClick={copyToClipboard}>Copy Link</button>
                 </div>

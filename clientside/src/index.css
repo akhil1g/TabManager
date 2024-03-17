@@ -2,7 +2,7 @@
     --white: #fbf9f7;
     --blue: #1089FF;
     --darkblue: #23374D;
-    --grey: #E5E5E5;
+    --bg: rgb(214, 225, 249);;
 }
 html,body{
     margin: 0;

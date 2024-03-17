@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    background-color: var(--white);
 }
 .nav-icon{
     margin-left: 5px;

@@ -1,0 +1,31 @@
+.home7-grp-box{
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+.box7-options{
+    display: flex;
+    justify-content: center;
+}
+.box7-options span{
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-size: 17px;
+    margin: 5px 5px 0 5px;
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+    }
+}
+.line7{
+    width: 95%;
+    height: 0px;
+    border: 1.5px solid black;
+}
+.export.on, .import.on{
+    background-color: var(--bg);
+}

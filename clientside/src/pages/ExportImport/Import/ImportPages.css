@@ -1,4 +1,4 @@
-.home2-box{
+.home7-box{
     width: 360px;
     display: flex;
     flex-direction: column;
@@ -8,74 +8,28 @@
     overflow-x: hidden;
     padding: 10px;
 }
-.box1{
+.box7{
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.box1 span{
-    width: fit-content;
-    margin-left: 5px;
-    font-size: 13px;
-    font-weight: 600px;
-}
-.grp-btn{
-    width: 100px;
-    height: 25px;
-    cursor: pointer;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: rgb(57, 139, 233);
-    &:hover{
-        background-color: white;
-    }
-}
-.grp-popup{
-    width: 150px;
-    padding: 5px;
-    position: absolute;
-    margin-top: 26px;
-    margin-right: 13px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    border-radius: 5px;
-    background-color: white;
-}
-.grp-popup input{
-    width: 95%;
-    padding: 5px;
-    font-size: 14px;
-}
-.grp-color{
     display: flex;
     justify-content: space-around;
-    gap: 4px;
+    align-items: center;
 }
-.color-btn{
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
+.box7 input{
+    font-size: 17px;
+    border-radius: 5px;
+    border: none;
+}
+.box7 button{
+    width: fit-content;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 5px;
+    background-color: var(--blue);
     border: none;
     &:hover{
-        -webkit-box-shadow: -0.5px -0.5px 5px 3.5px #eaeaea;
-        -moz-box-shadow: -0.5px -0.5px 5px 3.5px #eaeaea;
-        box-shadow: -0.5px -0.5px 5px 3.5px #eaeaea;
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+        background-color: var(--white);
+        border: 1px solid black;
+        color: var(--bg);
     }
-}
-.done-btn{
-    width: fit-content;
-    font-size: 12px;
-}
-.tab2-list{
-    width: 100%;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
 }

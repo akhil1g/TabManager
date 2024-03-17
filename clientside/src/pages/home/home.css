@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px;
@@ -39,6 +39,8 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;
+    background-color: var(--bg);
 }
 .window-dets{
     display: flex;
@@ -54,11 +56,14 @@
     margin-right: 5px;
     margin-bottom: 2px;
     font-size: 12px;
-    cursor: pointer;
-    border: 0.5px solid;
     border-radius: 5px;
+    background-color: var(--blue);
+    border: none;
     &:hover{
         box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+        background-color: var(--white);
+        border: 1px solid black;
+        color: black;
     }
 }
 .tab-list{
