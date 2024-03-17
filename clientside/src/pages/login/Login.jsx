@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from "react";
-import {auth, provider} from "./config";
-import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router";
 import './login.css'
+
+
+/* global chrome */
 
 const Login = function()
 {
@@ -12,34 +13,40 @@ const Login = function()
     async function loginUser(event)
     {
         event.preventDefault();
-        const response=await fetch('http://localhost:2000/api/login',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({email,password}),
+        const response = await fetch("http://localhost:2000/auth/login", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            // "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-allow-Origin": true,
+          },
+          body: JSON.stringify({ email, password }),
         });
-        const data=await response.json();
-        if(data.user)
-        {
-            localStorage.setItem('token',data.user);
-            navigate("/home");
+        console.log(response.status);
+        const result = await fetch("http://localhost:2000/auth/user", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-allow-Credentials": true,
+          },
+        });
+        const data = await result.json();
+        console.log(data);
+        if (data.code == 200) {
+          navigate("/home");
         }
-        else
-        {
-            alert('Please check your Username and Password carefully');
+        else {
+            alert("Please check your Username and Password carefully");
         }
     }
+
     const handleClick=()=>{
-        signInWithPopup(auth, provider).then((data)=>{
-            setValue(data.user.email)
-            localStorage.setItem("email", data.user.email)
-        })
+        chrome.tabs.update({
+          url: "http://localhost:2000/auth/google",
+        });
     }
-    const [value, setValue] = useState('');
-    useEffect(() =>{ 
-        setValue(localStorage.getItem('email'))
-    })
 
     return (
         <div className="login-box">

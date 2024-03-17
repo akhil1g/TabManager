@@ -2,7 +2,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import jwt from 'jwt-decode';
 import './ImportPages.css'
 
 function ImportPages(){
@@ -24,18 +23,25 @@ function ImportPages(){
     };
 
     useEffect(function () {
-        const token = localStorage.getItem('token');
-        console.log(token);
-        if (token) {
-            const user = jwt(token);
-            console.log(user);
-            if(!user){
-                navigate.replace('/login');
-            }else{
-                console.log("err")
-            }
+        async function getUser() {
+          const result = await fetch("http://localhost:2000/auth/user", {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-allow-Credentials": true,
+            },
+          });
+          const data = await result.json();
+          console.log(data);
+          if (data.code != 200) {
+            navigate.replace("/login");
+          } else {
+          }
         }
+        getUser();
     }, [navigate])
+
 
     return(
         <div className="home7-box">

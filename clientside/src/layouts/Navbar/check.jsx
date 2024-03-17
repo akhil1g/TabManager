@@ -6,17 +6,41 @@ import './navbar.css'
 const Check = function()
 {
     const navigate=useNavigate();
-    const [token, setToken] = useState(null);
+    const [user, setUser] = useState('');
     useEffect(() => {
-        const t = localStorage.getItem('token');
-        setToken(t);
+         async function getUser() {
+           const result = await fetch("http://localhost:2000/auth/user", {
+             method: "GET",
+             credentials: "include",
+             headers: {
+               "Content-Type": "application/json",
+               "Access-Control-allow-Credentials": true,
+             },
+           });
+           const data = await result.json();
+           console.log(data);
+           if (data.code == 200) {
+                setUser(data.user.name);
+           } else {
+             window.location.href = "/";
+           }
+         }
+         getUser();
     }, []);
-    const handlelogout = function () {
-        localStorage.removeItem('token');
+    const handlelogout = async function  () {
+        const result = await fetch("http://localhost:2000/auth/logout", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-allow-Credentials": true,
+          },
+        });
+        console.log(result);
         navigate('/');
     }
 
-    if(token) {
+    if(user!=null) {
         return <button className="logout" onClick={handlelogout}>Logout</button>;
     }
 

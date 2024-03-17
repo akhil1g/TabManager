@@ -5,10 +5,10 @@ import Main from './pages/main/Main.jsx';
 import Login from './pages/login/Login.jsx';
 import Register from './pages/register/Register.jsx';
 import Home from './pages/home/Home.jsx';
-import Groups from './pages/groups/Groups.jsx';
+import Groups from '../src/pages/Groups/Groups.jsx';
 import Sessions from './pages/sessions/sessions.jsx';
-import Settings from './pages/settings/Settings.jsx'
-import ExportImport from './pages/ExportImport/ExportImport.jsx'
+import Settings from '../src/pages/Settings/Settings.jsx';
+import ExportImport from './pages/ExportImport/ExportImport.jsx';
 
 export default function App() {
   return (
