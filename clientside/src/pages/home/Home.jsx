@@ -3,8 +3,8 @@
 import React,{useEffect, useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom'
 import jwt from 'jwt-decode'
-import Navbar from "../Navbar/Navbar";
-import Card from '../Components/TabItem'
+import Navbar from "../../layouts/Navbar/Navbar";
+import Card from '../../components/TabItem'
 import { CiSearch } from "react-icons/ci";
 import './home.css'
 
@@ -76,7 +76,7 @@ function Home() {
     //To Close A Tab
     const handleTabClose = (tabId) => {
         chrome.tabs.remove(tabId, () => {
-            console.log(Tab ${tabId} closed successfully);
+            console.log("Tab closed successfully");
         });
     };
 

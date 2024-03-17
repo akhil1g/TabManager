@@ -8,6 +8,7 @@ import Home from './pages/home/Home.jsx';
 import Groups from './pages/groups/Groups.jsx';
 import Sessions from './pages/sessions/sessions.jsx';
 import Settings from './pages/settings/Settings.jsx'
+import ExportImport from './pages/ExportImport/ExportImport.jsx'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/groups" element={<Groups />} />
           <Route path="/sessions" element = {<Sessions/>}/>
           <Route path="/settings" element={<Settings/>}/>
+          <Route path="/exports" element={<ExportImport/>}/>
         </Routes>
       </MemoryRouter>
     </div>
