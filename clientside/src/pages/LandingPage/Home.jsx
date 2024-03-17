@@ -21,7 +21,7 @@
         const [duplicateUrls, setDuplicateUrls] = useState([]);
         const [duplicateTabIds, setDuplicateTabIds] = useState([]);
         const [ifDuplicate, setIfDuplicate]=useState(false);
-        const [boomarks,setBookmarks]=useState([]);
+        const [bookmarks,setBookmarks]=useState([]);
         const highlightedTabRef = useRef(null);
 
 
@@ -210,28 +210,51 @@
             findDuplicateTabs(); 
         }
         
+        const handleBookmark = (tabTitle, tabUrl) => {
+            // Check if the tab is already bookmarked
+            const isBookmarked = bookmarks.some(bookmark => bookmark.url === tabUrl);
+        
+            if (isBookmarked) {
+                // If the tab is already bookmarked, remove the bookmark
+                removeBookmark(tabUrl);
+            } else {
+                // If the tab is not bookmarked, create a bookmark
+                bookmarkTab(tabTitle, tabUrl);
+            }
+        };
         //create a bookmark
         const bookmarkTab = (tabTitle, tabUrl) => {
             console.log('Tab Title:', tabTitle);
             console.log('Tab URL:', tabUrl);
-
             // Create a bookmark for the specified tab
             chrome.bookmarks.create({
                 title: tabTitle,
                 url: tabUrl
             }, (newBookmark) => {
                 console.log('Bookmark created:', newBookmark);
-                const bookmarkId = newBookmark.id;
-                setBookmarks(prevBookmarks => [...prevBookmarks, bookmarkId]);
+                // // Update isBookmarked state
+                // setIsBookmarked(true);
+                // Add the newly created bookmark to the bookmarks state
+                setBookmarks(prevBookmarks => [...prevBookmarks, newBookmark]);
             });
         };
-        
-        // //remove bookmark
-        // const removeBookmark = (bookmarkId) => {
-        //     chrome.bookmarks.remove(bookmarkId, () => {
-        //         console.log('Bookmark removed');
-        //     });
-        // };
+       // Function to remove the bookmark for the tab
+        const removeBookmark = (tabUrl) => {
+            // Find the bookmark corresponding to the tab URL
+            const bookmarkToRemove = bookmarks.find(bookmark => bookmark.url === tabUrl);
+            if (bookmarkToRemove) {
+                const bookmarkId = bookmarkToRemove.id;
+                // Remove the bookmark by ID
+                chrome.bookmarks.remove(bookmarkId, () => {
+                    console.log('Bookmark removed');
+                    // Update the bookmarks state by filtering out the removed bookmark
+                    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.id !== bookmarkId);
+                    setBookmarks(updatedBookmarks);
+                });
+            } else {
+                console.log('Bookmark not found for the tab URL:', tabUrl);
+            }
+        };
 
         return (
         <div>
@@ -273,8 +296,9 @@
                                 ref={ref}
                                 //duplicate
                                 isDuplicate={ifDuplicate && duplicateTabIds.includes(x.id)}
-                                //bookmark
-                                handleBookmark={()=>bookmarkTab(x.title,x.url)}
+                                 // Pass the handleBookmark function
+                                handleBookmark={() => handleBookmark(x.title, x.url)}
+                                isBookmarked={bookmarks.some(bookmark => bookmark.url === x.url)}
                             />)
                         })} 
                         </div>

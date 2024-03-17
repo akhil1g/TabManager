@@ -3,6 +3,7 @@
     import { TiPin } from "react-icons/ti";
     import { IoCloseSharp } from "react-icons/io5";
     import { MdOutlineStarOutline } from "react-icons/md";
+    import { MdOutlineStarPurple500 } from "react-icons/md";
 
     import './Tabitem.css'
 
@@ -10,8 +11,6 @@
         
         const [selectedTabs,setSelectedTabs] = useState([]);
         const [isPinned, setIsPinned] = useState(false);
-        const { highlight } = props;
-        const { isDuplicate } = props;
         const cardRef = useRef(null);
         const [isBookmarked, setIsBookmarked] =useState(false);
 
@@ -34,27 +33,45 @@
 
         // Scroll to this card when it's highlighted
         useEffect(() => {
-            if (highlight) {
+            if(props.highlight) {
                 cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
             }
-        }, [highlight]);
+        }, [props.highlight]);
 
+        // Function to handle bookmark
+        const handleBookmark = () => {
+            props.handleBookmark();
+            setIsBookmarked(!isBookmarked); // Toggle bookmark state
+        };
+
+        // Update bookmark state when props change
+        useEffect(() => {
+            setIsBookmarked(props.isBookmarked);
+        }, [props.isBookmarked]);
 
 
         return (
             <div ref={cardRef} 
-                className={`tab-card ${highlight ? 'highlight' : ''}${isDuplicate ? 'duplicate' : ''}`}>
+                className={`tab-card ${props.highlight ? 'highlight' : ''}${props.isDuplicate ? 'duplicate' : ''}`}>
                 {/* <input type="checkbox"
                     value={props}
                     onChange={handleChange}
                     className="tab-check"></input> */}
                 <img alt="" src={props.icon} className="tab-img"/>
                 <div className="tab-title">{props.title}</div>
-                <MdOutlineStarOutline size={20} className="tab-close" onClick={props.handleBookmark}/>
+                {isBookmarked ? (<MdOutlineStarPurple500 
+                                    size={20} 
+                                    className="tab-close" 
+                                    onClick={handleBookmark}/>)
+                              : (<MdOutlineStarOutline 
+                                    size={20} 
+                                    className="tab-close"
+                                    onClick={handleBookmark}/>)
+                }
                 <TiPin 
                     className={`${isPinned ? 'tab-pin' : 'tab-unpin'}`}
                     onClick={props.handlePinToggle} size={20}/>
-                <IoCloseSharp size={20} className="tab-close" onClick={props.onCloseTab}/>
+                <IoCloseSharp size={20} className="tab-close" onClick={() => props.onCloseTab(props.id)}/>
             </div>
         );
     }
