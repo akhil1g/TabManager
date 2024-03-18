@@ -7,6 +7,7 @@ import Navbar from "../../layouts/Navbar/Navbar"
 import Card from "../../components/TabItem"
 import { CiSearch } from "react-icons/ci";
 import { BiSolidDuplicate } from "react-icons/bi";
+import { Tooltip } from 'react-tooltip'
 import './home.css'
 
 /*global chrome*/
@@ -225,7 +226,11 @@ function Home() {
                     <CiSearch size={17}/>
                     <input type="text" placeholder="Search Tabs..." onChange={handleSearch} autoFocus/>
                 </div>
-                <BiSolidDuplicate size={22} className="duplicate" onClick={handleHighlightDuplicates}/>
+                <BiSolidDuplicate size={22} className="duplicate" onClick={handleHighlightDuplicates}
+                                data-tooltip-id="duplicate"
+                                data-tooltip-content="Highlight Duplicate"
+                                data-tooltip-place="top"/>
+                <Tooltip id="duplicate" />
             </div>
             {windowsWithTabs.map((y, index)=>{
                 return (
