@@ -12,7 +12,7 @@ const FAILURE_URL = "http://localhost:2000/auth/failure-google";
 
 // mongoose connection string
 mongoose
-  .connect(process.env.MONGOOSE_CONNECTION_STRING)
+  .connect("mongodb+srv://ishavishwakarma29:ishaTabManager=true&w=majority&appName=Cluster0")
   .then(() => {
     console.log("success");
   })
@@ -62,11 +62,13 @@ router.get(
   }),
   (req, res) => {
     const user = req.user;
+    console.log(user);
     if (!user) {
       res.redirect(FAILURE_URL);
     }
     req.logIn(user, (err) => {
       if (err) {
+        console.log(error);
         res.redirect(FAILURE_URL);
       }
       res.redirect(SUCCESS_URL);
@@ -76,7 +78,7 @@ router.get(
 
 // login route
 router.post("/login", (req, res, next) => {
-  console.log("login hande");
+  console.log("login handle");
   console.log(req.body);
   passport.authenticate("local-login", (err, user) => {
     if (err) {
@@ -144,7 +146,7 @@ router.get("/user", async (req, res) => {
 });
 
 // register route
-router.post("/api/register", async function (req, res) {
+router.post("/register", async function (req, res) {
   console.log(req.body);
   try {
     const encryptedpw = await bcrypt.hash(req.body.password, 10);

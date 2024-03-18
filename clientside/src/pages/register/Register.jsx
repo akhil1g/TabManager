@@ -1,26 +1,27 @@
-import React,{useState} from "react";
-import './register.css'
+import React, {useState} from "react";
 import { useNavigate } from "react-router";
+import './register.css'
 
-const Register=function()
-{
-    const [name,setName]=useState("");
-    const [email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
+const Register=function(){
+    const [name,setName] = useState("");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
     const navigate = useNavigate();
 
    async function registerUser(event) {
-     event.preventDefault();
-     const response = await fetch("http://localhost:2000/auth/register", {
-       method: "POST",
-       mode: "cors",
-       body: JSON.stringify({ name, email, password }),
-       headers: {
-         "Content-Type": "application/json",
-       },
-     });
-     const data = await response.json();
-     if (data.status === "ok") window.location.href = "./login";
+        event.preventDefault();
+        const response = await fetch("http://localhost:2000/auth/register", {
+            method: "POST",
+            mode: "cors",
+            body: JSON.stringify({ name, email, password }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        if (data.status === "ok") {
+            navigate("/login");
+        }
    }
 
     return (

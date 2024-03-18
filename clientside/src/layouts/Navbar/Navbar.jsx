@@ -1,10 +1,13 @@
 import React from "react";
 import Check from "./check";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { IoSettingsOutline } from "react-icons/io5";
 import './navbar.css';
 
 export default function Navbar(){
+
+    const navigate = useNavigate();
+
     const handleonClick = function(){
          async function getUser() {
            const result = await fetch("http://localhost:2000/auth/user", {
@@ -17,19 +20,18 @@ export default function Navbar(){
            });
            const data = await result.json();
            console.log(data);
-           if (data.code == 200) {
-             window.location.href = "/home";
+           if (data.code === 200) {
+             navigate("/home");
            }
            else{
-             window.location.href = "/";
+            navigate("/");
            }
          }
     }
    
     return (
         <div className="nav-box">
-            <img src="../../../public/images/browser.ico" className="nav-icon" alt=" " />
-            <img src="./browser(1).ico" className="nav-icon" alt=" " />
+            <img src='./browser(1).png' className="nav-icon" alt=" " />
             <div className="nav-heading" onClick={handleonClick}>TabHub</div>
             <Link to="/home" className="nav-ele">Home</Link>
             <Link to="/groups" className="nav-ele">Groups</Link>

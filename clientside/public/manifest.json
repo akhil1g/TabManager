@@ -1,17 +1,13 @@
 {
-    "name": "Tab Manager",
+    "name": "TabHub",
     "description": "manage all your tabs in one go",
     "version" : "1.0.0",
     "manifest_version": 3,
     "author": "3AI",
-    "icons":{
-        "16":"./images/browser(1).png",
-        "48":"./images/browser(1).png"
-    },
     "action":{
-      "default_title": "Tab Manger",
+      "default_title": "TabHub",
       "default_popup": "index.html",
-      "default_icon": "./images/browser(1).ico"
+      "default_icon": "./images/browser(1).png"
     },
     "background": {
       "service_worker": "./background.js",

@@ -6,6 +6,7 @@ import jwt from 'jwt-decode'
 import Navbar from "../../layouts/Navbar/Navbar"
 import Card from "../../components/TabItem"
 import { CiSearch } from "react-icons/ci";
+import { BiSolidDuplicate } from "react-icons/bi";
 import './home.css'
 
 /*global chrome*/
@@ -219,9 +220,12 @@ function Home() {
         <Navbar/>
         <div className="home-box">
             <h1 className="home-name">Hello, {userName}!</h1>
-            <div className="search-box">
-                <CiSearch size={17}/>
-                <input type="text" placeholder="Search Tabs..." onChange={handleSearch} autoFocus/>
+            <div className="item">
+                <div className="search-box">
+                    <CiSearch size={17}/>
+                    <input type="text" placeholder="Search Tabs..." onChange={handleSearch} autoFocus/>
+                </div>
+                <BiSolidDuplicate size={22} className="duplicate" onClick={handleHighlightDuplicates}/>
             </div>
             {windowsWithTabs.map((y, index)=>{
                 return (
@@ -261,7 +265,6 @@ function Home() {
                     </div>
                 </div>)})}
         </div>
-        <button onClick={handleHighlightDuplicates}>duplicate</button>
     </div>);
 }
 

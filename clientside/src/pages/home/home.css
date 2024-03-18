@@ -16,6 +16,12 @@
     font-weight: 600;
     margin-right: auto;
 }
+.item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 .search-box{
     width: fit-content;
     display: flex;
@@ -26,12 +32,18 @@
     padding-left: 2px;
 }
 .search-box input{
-    width: 300px;
+    width: 250px;
     height: 17px;
     outline: none;
     border: none;
     border-radius: 5px;
     margin-left: 2px;
+}
+.duplicate{
+    margin-right: 10px;
+    &:hover{
+        color: var(--blue);
+    }
 }
 .window-list{
     width: 95%;
@@ -67,6 +79,7 @@
     }
 }
 .tab-list{
+    margin-top: 5px;
     max-height: 150px;
     width: 100%;
     display: flex;

@@ -37,7 +37,7 @@ app.use(
 //connecting mongodb server
 mongoose
   .connect(
-    process.env.MONGOOSE_CONNECTION_STRING
+    "mongodb+srv://ishavishwakarma29:ishaTabManager@cluster0.qdm8x0l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     )
   .then(() => {
     console.log("success");

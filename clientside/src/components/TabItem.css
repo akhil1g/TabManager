@@ -8,12 +8,6 @@
         background-color:rgb(140, 143, 143);
     }
 }
-.tab-card.highlight{
-    background-color: rgb(255, 123, 0);
-}
-.tab-card.duplicate{
-    background-color: pink;
-}
 .tab-check{
     width: 15px;
     height: 15px;
@@ -30,13 +24,28 @@
     margin-left: 5px;
 }
 .tab-pin{
+    margin-left: auto;
+    margin-right: 10px; 
     align-self: flex-end; 
-    color: rgb(32, 105, 242);
+    color: var(--blue);
+    &:hover{
+        color: black;
+    }
 }
 .tab-unpin{
     margin-left: auto;
     margin-right: 10px; 
+    color: black;
+    &:hover{
+        color: var(--blue);
+    }
 }
 .tab-close:hover{
-    color:rgb(238, 168, 5)
+    color: var(--blue);
+}
+.tab-card.highlight{
+    background-color: rgb(255, 123, 0);
+}
+.tab-card.duplicate{
+    background-color: pink;
 }
