@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 
 // mongoose connection string
 mongoose
-  .connect("mongodb+srv://ishavishwakarma29:ishaTabManager@cluster0.qdm8x0l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+  .connect(process.env.MONGOOSE_CONNECTION_STRING)
   .then(() => {
     console.log("success");
   })
