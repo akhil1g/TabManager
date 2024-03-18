@@ -1,5 +1,5 @@
 <h1>INNODEV 2K24</h1>
-[Presentation](TABHUB(1).pdf)
+[Presentation](https://github.com/akhil1g/TabManager/blob/main/TABHUB%20(2).pdf)
 <h3>Team Name : 3AI</h3>
 <h3>Team Members Name : </h3>
 
@@ -12,7 +12,7 @@
 [Aditya Singh Yadav](https://github.com/aditya-mnnit)
 <br>
 <h3>
-  Proposed Features : 
+Features : 
 </h3>
 Secure Login and Signup Feature<br>
 Enable users to pin/unpin, close, open new chrome tabs in desired workspace<br>
