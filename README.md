@@ -14,9 +14,14 @@ Features :
 </h3>
 Secure Login and Signup Feature<br>
 Enable users to pin/unpin, close, open new chrome tabs in desired workspace<br>
-Feature to preview all the opened tabs in each respective windows<br>
+Feature to preview all the opened tabs in each respective windows and also highlight duplicate tabs<br>
 Feature to create Tab Groups in chrome and allocate them desired name and colors<br>
-Allows users to save and restore chome sessions<br>
+Feature to expand/collapse, close and ungroup created groups<br>
+Allows users to save current sessions and restore presviously saved sessions<br>
+Automatically closes inactive tabs based on user defined set interval<br>
+Users can export selected tabs and also import multiple tabs using shared link<br>
+Users can pin/unpin and launch extension using keyboard shortcuts<br>
+
 
 <h3>
   Tech Stack : 
@@ -25,5 +30,5 @@ FrontEnd : Reactjs<br>
 BackEnd : Nodejs, Expressjs <br>
 Database : MongoDB
 <br>
-[](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
+[PPT Link : ](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
 <h3>Team Name : 3AI</h3>
