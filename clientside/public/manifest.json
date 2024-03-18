@@ -7,11 +7,15 @@
     "action":{
       "default_title": "TabHub",
       "default_popup": "index.html",
-      "default_icon": "./images/browser(1).png"
+      "default_icon": "browser.png"
+    },
+    "icons": {
+      "16": "browser.png",
+      "32": "browser(1).png",
+      "128": "browser128.png"
     },
     "background": {
-      "service_worker": "./background.js",
-      "persistent": false
+      "service_worker": "./background.js"
     },
     "commands": {
       "pinTab": {

@@ -73,7 +73,27 @@ const Restore = ({saved, setTotalSessions}) => {
             });
         });
     }
-    
+
+    async function handleDeleteSession(sessionId) {
+        try 
+        {
+            const response = await fetch('http://localhost:2000/api/deletesession', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ sessionId })
+            });
+            const data = await response.json();
+            console.log(data);
+            setSessions(prevSessions => prevSessions.filter(session => session.id !== sessionId));
+        }
+         catch (err) 
+        {
+            console.error('Error deleting session:', err);
+        }
+    }
+
     const arr = sessions.slice().reverse();
 
     return (
@@ -83,6 +103,7 @@ const Restore = ({saved, setTotalSessions}) => {
                     <div className="ses-box">
                         <div className="ses-dets">
                             <span>{session.date}</span>
+                            <button onClick={()=>handleDeleteSession(session._id)} className="delete-btn">Delete</button>
                             <button onClick={() => handleRestore(session.windowIds, session.tabs)}>Restore</button>
                         </div>
                         {session.windowIds.map((y,index) => {

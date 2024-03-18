@@ -10,6 +10,7 @@ const app = express();
 const RestoreSessionRouter = require("./routes/RestoreSession.js");
 const SaveSessionRouter = require("./routes/SaveSession.js")
 const authRoute = require('./routes/auth');
+const DeleteSessionRouter=require("./routes/DeleteSession.js")
 
 
 
@@ -37,7 +38,7 @@ app.use(
 //connecting mongodb server
 mongoose
   .connect(
-    process.env.MONGOOSE_CONNECTION_STRING
+    'mongodb+srv://ishavishwakarma29:ishaTabManager@cluster0.qdm8x0l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
     )
   .then(() => {
     console.log("success");
@@ -51,6 +52,7 @@ mongoose
 app.use("/auth", authRoute);
 app.use("/api/savesession", SaveSessionRouter);
 app.use("/api/restoresessions", RestoreSessionRouter);
+app.use("/api/deletesession",DeleteSessionRouter);
 
 
 const PORT = 2000;

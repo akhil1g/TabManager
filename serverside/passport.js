@@ -9,7 +9,7 @@ const LocalStrategy = require("passport-local").Strategy;
 
 // mongoose connection string
 mongoose
-  .connect(process.env.MONGOOSE_CONNECTION_STRING)
+  .connect('mongodb+srv://ishavishwakarma29:ishaTabManager@cluster0.qdm8x0l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => {
     console.log("success");
   })
@@ -62,8 +62,8 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: '944342896743-e3ad8fe2g3skmtcv8n153voi90u1i85s.apps.googleusercontent.com',
+      clientSecret: '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',
       callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, cb) => {

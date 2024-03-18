@@ -20,16 +20,31 @@
 .ses-dets{
     width: 98%;
     display: flex;
-    justify-content: space-between;
     border-radius: 5px;
 }
 .ses-dets span{
     font-size: 12px;
     font-weight: 600;
+    margin-right: auto;
 }
 .ses-dets button{
     width: 65px;
-    margin-left: 5px;
+    margin-left: auto;
+    font-size: 13px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    border: none;
+    &:hover{
+        box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+        background-color: var(--white);
+        border: 1px solid black;
+        color: black;
+    }
+}
+.delete-btn{
+    width: 65px;
+    margin-left: auto;
+    margin-right: -60px;
     font-size: 13px;
     border-radius: 5px;
     background-color: var(--blue);

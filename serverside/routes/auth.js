@@ -12,7 +12,7 @@ const FAILURE_URL = "http://localhost:2000/auth/failure-google";
 
 // mongoose connection string
 mongoose
-  .connect(process.env.MONGOOSE_CONNECTION_STRING)
+  .connect('mongodb+srv://ishavishwakarma29:ishaTabManager@cluster0.qdm8x0l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
   .then(() => {
     console.log("success");
   })
