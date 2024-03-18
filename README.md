@@ -25,5 +25,5 @@ FrontEnd : Reactjs<br>
 BackEnd : Nodejs, Expressjs <br>
 Database : MongoDB
 <br>
-[Presentation](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
+[](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
 <h3>Team Name : 3AI</h3>
