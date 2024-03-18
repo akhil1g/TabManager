@@ -81,14 +81,12 @@ function Settings(){
                 <div className="box6-1">
                     <div className="box-title">About Us</div>
                     <div className="line6"></div>
-                    <div>
-                        <span>Project made for Innodev '24 under Electromania @ MNNIT, Allahabad</span>
-                        <span>Contributers:</span>
-                        <a href="/">Akhil Gupta</a>
-                        <a href="/">Aarya Khandare</a>
-                        <a href="/">Isha Vishwakarma</a>
-                        <a href="/">Aditya Singh Yadav</a>
-                    </div>
+                    <span>Project made for Innodev'24 under Electromania @ MNNIT, Allahabad</span>
+                    <span>Contributers:</span>
+                    <a href="https://github.com/akhil1g">Akhil Gupta</a>
+                    <a href="https://github.com/aaryak4554">Aarya Khandare</a>
+                    <a href="https://github.com/ishavishwakarma29">Isha Vishwakarma</a>
+                    <a href="https://github.com/aditya-mnnit">Aditya Singh Yadav</a>
                 </div>
             </div>
         </div>
