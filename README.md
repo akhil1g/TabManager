@@ -1,6 +1,4 @@
 <h1>INNODEV 2K24</h1>
-[Presentation](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
-<h3>Team Name : 3AI</h3>
 <h3>Team Members Name : </h3>
 
 [Akhil Gupta](https://github.com/akhil1g)
@@ -27,3 +25,5 @@ FrontEnd : Reactjs<br>
 BackEnd : Nodejs, Expressjs <br>
 Database : MongoDB
 <br>
+[Presentation](https://drive.google.com/file/d/15UPYUqYR3iQxn2sjwZgmI0RzQhhtDLfd/view?usp=sharing)
+<h3>Team Name : 3AI</h3>
