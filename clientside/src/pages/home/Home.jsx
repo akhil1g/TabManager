@@ -2,29 +2,27 @@
 import React from "react";
 import {useEffect, useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom'
-import jwt from 'jwt-decode'
 import Navbar from "../../layouts/Navbar/Navbar"
 import Card from "../../components/TabItem"
 import { CiSearch } from "react-icons/ci";
-import { BiSolidDuplicate } from "react-icons/bi";
+import { HiDocumentDuplicate } from "react-icons/hi";
 import { Tooltip } from 'react-tooltip'
 import './home.css'
 
-/*global chrome*/
 
 function Home() {
 
     const navigate = useNavigate();
-    const [userName,setName] = useState("");
-    const [allTabs,setAllTabs] = useState([]);
-    const [allWindows,setAllWindows] = useState([]);
+    const [userName, setName] = useState("");
+    const [allTabs, setAllTabs] = useState([]);
+    const [allWindows, setAllWindows] = useState([]);
     const [windowsWithTabs, setWindowsWithTabs] = useState([]);
     const [windowCount, setWindowCount] = useState(0);
     const [searchQuery, setSearchQuery] = useState("");
     const [duplicateUrls, setDuplicateUrls] = useState([]);
     const [duplicateTabIds, setDuplicateTabIds] = useState([]);
     const [ifDuplicate, setIfDuplicate]=useState(false);
-    const [boomarks,setBookmarks]=useState([]);
+    const [boomarks, setBookmarks]=useState([]);
     const highlightedTabRef = useRef(null);
 
 
@@ -99,47 +97,43 @@ function Home() {
     }
 
 
-        //To Unpin A Tab
-        const unPinTab = (tabId) => {
-            chrome.tabs.get(tabId, (tab) => {
-                chrome.tabs.remove(tabId, () => {
-                    console.log("tab closed successfully");
-                });
-                chrome.tabs.create({ 
-                    url: tab.url, 
-                    pinned: false,
-                    windowId: tab.windowId },
-                    () => {
-                        console.log("new same tab created");
-                });
-            })
-        }
+    //To Unpin A Tab
+    const unPinTab = (tabId) => {
+        chrome.tabs.get(tabId, (tab) => {
+            chrome.tabs.remove(tabId, () => {
+                console.log("tab closed successfully");
+            });
+            chrome.tabs.create({ url: tab.url, pinned: false, windowId: tab.windowId },() => {
+                console.log("new same tab created");
+            });
+        })
+    }
 
 
-        useEffect(function(){
-            async function getUser() {
-              const result = await fetch("http://localhost:2000/auth/user", {
+    useEffect(function(){
+        async function getUser() {
+            const result = await fetch("http://localhost:2000/auth/user", {
                 method: "GET",
                 credentials: "include",
                 headers: {
-                  "Content-Type": "application/json",
-                  "Access-Control-allow-Credentials": true,
+                    "Content-Type": "application/json",
+                    "Access-Control-allow-Credentials": true,
                 },
-              });
-              const data = await result.json();
-              console.log(data);
-              if (data.code != 200) {
-                navigate.replace("/login");
-              } else {
+            });
+            const data = await result.json();
+            console.log(data);
+            if (data.code != 200) {
+                navigate("/login");
+            } else {
                 getAllTabs();
                 getAllWindows();
                 getTabsOfWindow();
                 setName(data.user.name);
-              }
             }
-            getUser();
-         // eslint-disable-next-line react-hooks/exhaustive-deps
-         },[])
+        }
+        getUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
 
     const handleSearch = (e) => {
@@ -193,7 +187,6 @@ function Home() {
     
 
     function handleHighlightDuplicates(){
-        console.log("ewwww");
         console.log("Highlighting duplicates...");
         setIfDuplicate(!ifDuplicate);
         findDuplicateTabs(); 
@@ -226,7 +219,7 @@ function Home() {
                     <CiSearch size={17}/>
                     <input type="text" placeholder="Search Tabs..." onChange={handleSearch} autoFocus/>
                 </div>
-                <BiSolidDuplicate size={22} className="duplicate" onClick={handleHighlightDuplicates}
+                <HiDocumentDuplicate size={22} className="duplicate" onClick={handleHighlightDuplicates}
                                 data-tooltip-id="duplicate"
                                 data-tooltip-content="Highlight Duplicate"
                                 data-tooltip-place="top"/>
@@ -241,6 +234,7 @@ function Home() {
                                 onClick={() => createNewTab(y.windowId)}>New Tab
                         </button>
                     </div>
+                    <div className="linee"></div>
                     <div className="tab-list">
                     {y.tabs.map((x) => {
                         // Determine if the tab should be highlighted

@@ -2,15 +2,21 @@
     --white: #fbf9f7;
     --blue: #1089FF;
     --darkblue: #23374D;
-    --bg: rgb(214, 225, 249);;
+    --bg: rgb(214, 225, 249);
+    font-family: "Numans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 html,body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    width: 400px;
+    width: 500px;
     height: 500px;
     background-color: var(--white);
+    font-family: "Numans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 html::-webkit-scrollbar {
     display: none;

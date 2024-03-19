@@ -5,12 +5,8 @@
     gap: 5px;
     border-radius: 5px;
     &:hover{
-        background-color:rgb(140, 143, 143);
+        background-color:rgb(166, 166, 167);
     }
-}
-.tab-check{
-    width: 15px;
-    height: 15px;
 }
 .tab-img{
     height: 15px;
@@ -18,15 +14,22 @@
     margin-left: 5px;
 }
 .tab-title{
-    width:300px;
+    width:400px;
     height: 17px;
     overflow: hidden;
     margin-left: 5px;
 }
+.tab-book{
+    margin-left: auto;
+    margin-right: 7px;
+    color: black;
+    &:hover{
+        color: var(--blue);
+    }
+}
 .tab-pin{
     margin-left: auto;
-    margin-right: 10px; 
-    align-self: flex-end; 
+    margin-right: 7px;
     color: var(--blue);
     &:hover{
         color: black;
@@ -34,17 +37,21 @@
 }
 .tab-unpin{
     margin-left: auto;
-    margin-right: 10px; 
+    margin-right: 7px; 
     color: black;
     &:hover{
         color: var(--blue);
     }
 }
-.tab-close:hover{
-    color: var(--blue);
+.tab-close{
+    margin-left: auto;
+    margin-right: 5px;
+    &:hover{
+        color: var(--blue);
+    }
 }
 .tab-card.highlight{
-    background-color: rgb(255, 123, 0);
+    background-color: burlywood;
 }
 .tab-card.duplicate{
     background-color: pink;

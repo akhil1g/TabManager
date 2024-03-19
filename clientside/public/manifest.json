@@ -20,13 +20,13 @@
     "commands": {
       "pinTab": {
         "suggested_key": {
-          "default": "Ctrl+Y"
+            "default": "Ctrl+Y"
         },
         "description": "Pin the active tab"
       },
       "unpinTab": {
         "suggested_key": {
-          "default": "Ctrl+Q"
+            "default": "Ctrl+Q"
         },
         "description": "UnPin the active tab"
       },

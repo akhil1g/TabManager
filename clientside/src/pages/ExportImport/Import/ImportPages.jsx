@@ -13,9 +13,13 @@ function ImportPages(){
             const encodedData = importUrl.split('?data=')[1];
             const decodedData = atob(encodedData);
             const tabData = JSON.parse(decodedData);
-            for (const tab of tabData) {
-                chrome.tabs.create({ url: tab });
-            }
+            // Extract URLs from tabData
+            const urls = tabData.map(tab => ({ url: tab }));
+            // Create a new window and open tabs in it
+            chrome.windows.create({ 
+                focused: true,
+                url: urls.map(tab => tab.url),
+            });
         }
         catch (error) {
             console.error('Error importing tabs:', error);

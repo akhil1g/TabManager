@@ -7,7 +7,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "watch": "watch 'npm run build'"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +33,7 @@
     "react-toastify": "^10.0.4",
     "react-tooltip": "^5.26.3",
     "styled-components": "^6.1.8",
+    "watch": "^1.0.2",
     "web-vitals": "^3.5.2"
   }
 }

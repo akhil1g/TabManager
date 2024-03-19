@@ -9,24 +9,24 @@ export default function Navbar(){
     const navigate = useNavigate();
 
     const handleonClick = function(){
-         async function getUser() {
-           const result = await fetch("http://localhost:2000/auth/user", {
-             method: "GET",
-             credentials: "include",
-             headers: {
-               "Content-Type": "application/json",
-               "Access-Control-allow-Credentials": true,
-             },
-           });
-           const data = await result.json();
-           console.log(data);
-           if (data.code === 200) {
-             navigate("/home");
-           }
-           else{
-            navigate("/");
-           }
-         }
+        async function getUser() {
+            const result = await fetch("http://localhost:2000/auth/user", {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-allow-Credentials": true,
+                },
+            });
+            const data = await result.json();
+            console.log(data);
+            if (data.code === 200) {
+                navigate("/home");
+            }
+            else{
+                navigate("/");
+            }
+        }
     }
    
     return (

@@ -1,9 +1,9 @@
 .home7-grp-box{
-    width: 380px;
+    width: 480px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px;

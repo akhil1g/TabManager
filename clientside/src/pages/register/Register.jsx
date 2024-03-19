@@ -3,12 +3,12 @@ import { useNavigate } from "react-router";
 import './register.css'
 
 const Register=function(){
-    const [name,setName] = useState("");
-    const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-   async function registerUser(event) {
+    async function registerUser(event) {
         event.preventDefault();
         const response = await fetch("http://localhost:2000/auth/register", {
             method: "POST",
@@ -22,7 +22,8 @@ const Register=function(){
         if (data.status === "ok") {
             navigate("/login");
         }
-   }
+    }
+
 
     return (
         <div className="reg-box">
@@ -56,8 +57,6 @@ const Register=function(){
                     className="reg-input">
             </input>
             <button className="reg-button" type="submit" value="Register">Continue..</button>
-            <div className="reg-or">OR</div>
-            <hr></hr>
             </form>
         </div>
     )
