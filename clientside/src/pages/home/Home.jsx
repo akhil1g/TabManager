@@ -69,7 +69,18 @@ function Home() {
         chrome.tabs.create(
             {active: true,
             windowId: windowid},
-            () => console.log("new tab created with id:")
+            (newTab) => {
+                console.log("new tab created with id:", newTab.id);
+                // Update the state to reflect the new tab
+                setAllTabs((prevTabs) => [...prevTabs, newTab]);
+                setWindowsWithTabs((prevWindowsWithTabs) =>
+                    prevWindowsWithTabs.map((window) =>
+                        window.windowId === windowid
+                            ? { ...window, tabs: [...window.tabs, newTab] }
+                            : window
+                    )
+                );
+            }
         );
     }
 
@@ -78,6 +89,14 @@ function Home() {
     const handleTabClose = (tabId) => {
         chrome.tabs.remove(tabId, () => {
             console.log(`Tab ${tabId} closed successfully`);
+            setAllTabs((prevTabs) => prevTabs.filter((tab) => tab.id !== tabId));
+            setWindowsWithTabs((prevWindowsWithTabs) =>
+                prevWindowsWithTabs.map((window) => ({
+                    ...window,
+                    tabs: window.tabs.filter((tab) => tab.id !== tabId),
+                }))
+            );
+
         });
     };
 
