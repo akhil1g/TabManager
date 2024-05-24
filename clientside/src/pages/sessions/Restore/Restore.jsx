@@ -86,7 +86,13 @@ const Restore = ({saved, setTotalSessions}) => {
             });
             const data = await response.json();
             console.log(data);
-            setSessions(prevSessions => prevSessions.filter(session => session.id !== sessionId));
+            if (data.status === "ok") {
+                setSessions(prevSessions => {
+                    const updatedSessions = prevSessions.filter(session => session._id !== sessionId);
+                    setTotalSessions(updatedSessions.length);
+                    return updatedSessions;
+                });
+            }
         }
          catch (err) 
         {
@@ -94,11 +100,11 @@ const Restore = ({saved, setTotalSessions}) => {
         }
     }
 
-    const arr = sessions.slice().reverse();
+    // const arr = sessions.slice().reverse();
 
     return (
         <div className="box4">
-            {arr.map((session) => {
+            {sessions.slice().reverse().map((session) => {
                 return(
                     <div className="ses-box">
                         <div className="ses-dets">

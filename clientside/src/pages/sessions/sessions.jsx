@@ -55,7 +55,7 @@ const Sessions = function(){
     }
 
     useEffect(function(){
-        
+
         async function getUser() {
            const result = await fetch("http://localhost:2000/auth/user", {
              method: "GET",
